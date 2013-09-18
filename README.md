@@ -1,4 +1,5 @@
-bguiz.com
-=========
+# [bguiz.com](http://bguiz.com)
 
-blog at http://bguiz.com
+----
+
+My blog, which you can read at [bguiz.com](http://bguiz.com)
