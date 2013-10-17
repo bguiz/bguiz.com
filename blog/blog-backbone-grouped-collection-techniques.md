@@ -1,17 +1,34 @@
 <!-- BackboneJs Grouped Collection Techniques - Four Approaches -->
 <!-- javascript, backbonejs -->
 
+We start off with a standard Backbone model. Owing to my creative streak, I have decided to give it
+the exciting name of `Foo`.
+
 	var Foo = Backbone.Model.extend({
 		/* some code here */
 	});
 
-	//Default sollection
+The next thing that we do is to define a collection of `Foo` models.
+
 	Foo.Collection =  Backbone.Collection.extend({
-		model: Foo
+		model: Foo,
 		/* some code here */
 	});
 
-	//# alt 1 - upfront, best when updates don't occur very often, and access occurs very often
+This is important to do because we will be:
+
+- fetching multiple `Foo`s in a single HTTP request
+- displaying mutliple `Foo`s in a single Backbone view
+
+## Spanner in the works
+
+Next we add an additional requirement to the above.
+We are no longer satisified with displaying `Foo`s in a flat list in the views.
+We want them to be grouped according to a particular attribute, `bar` that every `Foo` has.
+
+There are several ways to do this:
+
+	//alternative #1
 	Foo.Collection =  Backbone.Collection.extend({
 		model: Foo,
 		initialize: function(initialModels, options) {
@@ -26,7 +43,11 @@
 		}
 	});
 
-	//# alt 2 - lazy, best when updates occur very often, and access occurs not as often
+In alternative #1, the collection listens to any changes on itself.
+As soon as one occurs, the regroup function is run.
+The view that wishes to display the grouped collection of `Foo`s calls `getGroupedModels`, and the grouping is always up to date.
+
+	//alternative #2
 	Foo.Collection =  Backbone.Collection.extend({
 		model: Foo,
 		initialize: function(initialModels, options) {
@@ -41,7 +62,11 @@
 		}
 	});
 
-	//# alt 3 - optimised, uses a flag to track whether updates have occurred
+In alternative #2, the collection does *not* listen to changes on itself.
+Instead, only when the view calls `getGroupedModels`, does it run the regroup function.
+Thus the grouping is not always up to date, and is recomputed just in time for when it is needed.
+
+	//alternative #3
 	Foo.Collection =  Backbone.Collection.extend({
 		model: Foo,
 		initialize: function(initialModels, options) {
@@ -64,7 +89,16 @@
 		}
 	});
 
-	//# alt 4 - use a separate collection. useful when data needs to be a backbone collection instead of POJSO array
+In alternative #3, the collection listens to changes on itself once more, same as in alternative #1.
+This time, however, the response to the change event is different:
+Instead of running the regroup function, as we did in alternative #1, we simply toggle a flag that indicates that a regroup needs to be done.
+When the view calls `getGroupedModels`, the regroup function is run only if the flag has been set,
+and of course, the flag is reset.
+Thus regroup is not run every time the collection is updated,
+and instead only when the collection is accessed, *and* is known to be out of date.
+This is done to ensure maximum laziness in computing the regroup.
+
+	//alternative #4
 	Foo.GroupedCollection = Backbone.Collection.extend({
 		initialize(models, options) {
 			this._origCollection = options.origCollection;
@@ -74,3 +108,11 @@
 			//parse this._origCollection and group by bar
 		}
 	});
+
+In alternative #4, the view requires a Backbone collection - a simple Javascript array will not suffice.
+So we leave `Foo.Collection` alone, and define another collection alongside it.
+We'll call this one `Foo.GroupedCollection`.
+(My creativity strikes once again!)
+`Foo.GroupedCollection` expects to be passed a `Foo.Collection` in its options when initialized.
+The grouped collection listens for changes on the regular collection;
+whenever the regular collection changes, it runs the regroup function, keeping itself up to date.
