@@ -116,3 +116,17 @@ We'll call this one `Foo.GroupedCollection`.
 `Foo.GroupedCollection` expects to be passed a `Foo.Collection` in its options when initialized.
 The grouped collection listens for changes on the regular collection;
 whenever the regular collection changes, it runs the regroup function, keeping itself up to date.
+
+## Source
+
+[Github Gist with all the above code](https://gist.github.com/bguiz/7021513)
+
+## Conclusion
+
+Alternative #4 is the only option when the view displaying the grouped collection is expecting a Backbone collection.
+Otherwise, any of alternatives #1 through #3 will do the job:
+
+- Alternative #3 is the most efficient, but the code is slightly more complex.
+- Alternative #1 and #2 are equivalent,
+with #1 optimal when the collection gets modified rarely, or it gets read frequently; because it is updated upon each modification.
+- Alternative #2 is optimal when the collection gets modified frequently, or it gets read rarely; because it is updated upon each read.
