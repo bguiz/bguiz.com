@@ -1,5 +1,13 @@
-<!-- BackboneJs Grouped Collection Techniques - Four Approaches -->
-<!-- javascript, backbonejs -->
+---
+title: BackboneJs Grouped Collection Techniques - Four Approaches
+slug: backbone-grouped-collection-techniques
+author: bguiz
+date: 2013-??-??
+template: article.jade
+tags:
+- javascript
+- backbonejs
+---
 
 We start off with a standard Backbone model. Owing to my creative streak, I have decided to give it
 the exciting name of `Foo`.
