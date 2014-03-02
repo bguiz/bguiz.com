@@ -19,3 +19,10 @@ While this was possible to do in an AngularJs `directive` or an EmberJs `Compone
 So I came up with some [improvements of my own](http://codepen.io/bguiz/pen/dtbFv). [And in gist form](https://gist.github.com/bguiz/9245614).
 
 [![SASS star rating widget improved](https://31.media.tumblr.com/4ce4e3ac9eff340e03168f0845409546/tumblr_inline_n1sgilq6yZ1rer3hy.png)](http://codepen.io/bguiz/pen/dtbFv)
+
+----
+
+EDIT: Just noticed that my comment has been marked as spam - please fix!
+
+![my comment marked as spam - oh noes](https://31.media.tumblr.com/1827287bd70fe6da9498b2fcea627446/tumblr_inline_n1sg5jBOdN1rer3hy.png)
+
