@@ -1,0 +1,25 @@
+- teaser
+- criteria
+- mvc-and-templates
+	- Models
+	- Views
+	- Controllers
+	- Templating
+- router-component
+	- Router
+	- Components
+- sw-eng-philosophy
+	- Level of abstraction/ structure
+	- Opinionation
+- developer-productivity
+	- Dependency management
+	- Build tooling
+	- Development tooling
+	- Dependencies
+- in-the-wild
+	- Community
+	- Track record
+	- Contributions
+	- Maturity
+- testing
+	- Testability
