@@ -33,7 +33,24 @@ That being said, if I have missed something out below, and you think it would be
 
 ## What the criteria are
 
-
+- Learning curve
+- Models
+- Views
+- Controllers
+- Router
+- Templating
+- Components
+- Dependency management
+- Build tooling
+- Opinionation
+- Development tooling
+- Dependencies
+- Community
+- Track record
+- Contributions
+- Maturity
+- Level of abstraction/ structure
+- Testability
 
 ## A note of fairness and polarisation
 
