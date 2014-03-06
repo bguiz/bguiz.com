@@ -22,6 +22,15 @@ We shall try, nonetheless.
 
 ## Why criteria are necessary
 
+Without facts, opinions will have their day in the park.
+We want to make this as non-subjective as possible.
+
+Also, it helps you the reader, know if this series of posts is going to be worth your time reading.
+If - and I know this is a silly example - whether the chipmunk or the shield with the "A" is the better logo is very important to you, and you want to choose your framework based on that;
+then these posts are not for you, as you do not see this being listed as one of the criteria below.
+
+That being said, if I have missed something out below, and you think it would benefit the discussion, [let me know](https://twitter.com/bguiz).
+
 ## What the criteria are
 
 
