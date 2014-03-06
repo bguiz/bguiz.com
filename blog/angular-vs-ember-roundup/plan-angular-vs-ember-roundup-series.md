@@ -8,6 +8,8 @@
 - router-component
 	- Router
 	- Components
+- testing
+	- Testability
 - sw-eng-philosophy
 	- Level of abstraction/ structure
 	- Opinionation
@@ -21,5 +23,3 @@
 	- Track record
 	- Contributions
 	- Maturity
-- testing
-	- Testability
