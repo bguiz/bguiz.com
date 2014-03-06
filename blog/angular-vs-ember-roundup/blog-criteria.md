@@ -52,8 +52,25 @@ That being said, if I have missed something out below, and you think it would be
 - Level of abstraction/ structure
 - Testability
 
+There we have it, all the criteria that this series of posts will cover!
+
 ## A note of fairness and polarisation
 
+Which one is better at what?
 
+One framework is is going to better than the other on some of the criteria, and the other way around on the others.
 
-## Let's begin!
+It is worth pointing out here that this a fairly polarised topic, 
+with the communities of developers using each of these frameworks, 
+firmly believing that their framework of choice is the best thing since sliced bread 
+(or at least **way better** than the other).
+
+Thus I feel that it is necessary to do a little bit of a disclaimer here, 
+and state that I belong to neither camp.
+I have worked with jQuery mobile, BB10 webworks, and BackboneJs before;
+and prior to this I have been keeping abreast with both AngularJs and EmberJs,
+but have not developed anything serious - nothing more complex than [a Todo app](http://todomvc.com) - before.
+
+tl;dr = I am going to be fair and unbiased.
+
+## Let&apos;s begin!
