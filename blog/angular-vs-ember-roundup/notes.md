@@ -36,6 +36,10 @@ Provides a directive called $http, which makes it very straight forward to updat
 
 Higher-level model interaction with server is made possible through the $resource directive.
 
+restangular:
+AngularJs&apos; way of dealing with model is BYO$A only.
+If you would like a wrapper to provide the standard RESTful functions, this library seesm to be the way to go.
+
 ### Views
 
 Almost N/A. You can define them to do trivial things. Templates do the heavy lifting.
@@ -45,6 +49,11 @@ Almost N/A. You can define them to do trivial things. Templates do the heavy lif
 Controllers aren’t really controllers. In fact angular [calls itself a MVW framework][6] (Model-View-Whatever)
 
 Limited in that behaviour is undefined when setting a primitive value on the $scope.
+
+Another limitation here lies around two-way data binding. In basic scenarios, it just works.
+However, when doing more complex things, you will run into situations where you need to imperatively trigger `$apply` and `$watch`.
+This is a deviation from the ideal of bindings being declarative.
+It is also tricky to understand exactly why updates are not happening, because the flow of data can actually be very complex.
 
 ### Router
 
@@ -65,13 +74,18 @@ Very easy to bind controller properties to template, and to invoke functions on 
 
 Declarative style syntax of linking templates with directives.
 
+The more expressive syntax can be a bad thing when you have designers (who are not also developers) modifying the templates, as angular allows, and sometimes needs, more code to be in the expressions within the template.
+
 ### Components
 
 Achieved via directives. Directives are too general purpose, and in order to make components from them, a deep understanding of scope isolation and transclusion is necessary. Can be made to work without such a deep understanding, however, can feel like a you are dealing with something at too low a level of abstraction.
 
 ### Dependency management
 
-Angular uses dependency injection to figure out which modules depend on which others and include them into each other, AMD style.
+Angular uses dependency injection to figure out which modules depend on which others and include them into each other.
+It is kinda like AMD, but it encourages you to do this at a more granular level.
+The canonical way to do this is to have one one each module.
+This approach to defining dependencies between each module and another is extremely powerful.
 
 ### Build tooling
 
@@ -174,7 +188,7 @@ built-in:
 Ember’s router runs a hierarchical state machine under the hood.
 
 As such, it know how to keep multiple controllers (that belong to the same vertical section of a hierarchical state) running at the same time. This makes rendering one view within the context of another view extremely easy to do, using {{outlet}} in the templates.
-
+This [demo of ember nested routes](http://jsbin.com/wiyin/4/) shows how trivially easy it is to get this going.
 
 ### Templating
 
@@ -182,6 +196,8 @@ built-in (handlebars):
 String-based templating, not DOM-aware, no expressions or piping, rendered DOM cluttered with <script> tags
 
 Easy to bind controller properties to template, and to invoke functions on the controller. Syntax is more restrictive than angular’s.
+
+The more restrictive syntax can be a good thing when you have designers (who are not also developers) modifying the templates.
 
 HTMLbars:
 Compatible with Handlebars, looks like migration should not be tricky.
@@ -198,6 +214,10 @@ This is one part where the learning curve for Ember is actually much easier than
 ### Dependency management
 
 Ember requires you to create a global ‘App’ object, and put everything in that, using it as a namespace.
+This is nowhere near as good as the AngularJs&apos; approach, because you do not know, and do not have any control, over how one class is used or is accessible from another, and just have to trust that the magic works behind the scenes.
+The closest it comes to this, is `this.controllerFor('foo')` and `this.get('target')`, which makes things workable in most cases but not all, an is the canonical way to accomplish this.
+The non-canonical way (probably because it is bad practice), is to simply access objects off the app namespace, e.g. `App.FooController`; however, this only works for class access, as opposed to instance access.
+This is supposedly going to change with the work that stefanpenner is doing with ember-app-kit and ember-cli using ES6 modules, but that is still a work in progress, and from the looks of it, `this.controllerFor` and similar is still going to be the canonical way to do things.
 
 ### Build tooling
 
@@ -216,7 +236,7 @@ Maintained by stefanpenner as well.
 
 Extremely opinionated on almost every aspect of SPAs:
 - The route must drive the current controller(s)
-- The naming conventions of all of the following: models, views, controllers, partials, templates, routes, router urls, components. This can be frustrating, when you cannot figure out why some code is not not kicking in. Ember Inspector is invaluable in discovering these. 
+- The naming conventions of all of the following: models, views, controllers, partials, templates, routes, router urls, components. This can be frustrating, when you cannot figure out why some code is not not kicking in. Ember Inspector is invaluable in discovering these.
 
 ### Development tooling
 
