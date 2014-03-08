@@ -14,9 +14,21 @@ tags:
 
 ## MVC + Templates
 
-- Define the concept
-- How they apply to single page apps
-- Diagrams
+Model-View-Controller (MVC) is a common software architecture pattern that is popular in web applications. 
+
+![Model-View-Controller interactions](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/200px-MVC-Process.svg.png)
+
+Prior to single-page applications, 
+this logic was coded almost entirely on the server - thin-client, thick-server.
+However, with single-page applications, web apps are thick-clients, 
+and a lot of this logic has been shifted to the client, 
+and the front end developer now needs to be well versed in this pattern.
+
+Most single-page application frameworks are designed around the MVC pattern, or variations of it. 
+
+While models, views, and controllers are at the core parts of most single-page application framework, they also include a few more core parts, templates, routing, and components. 
+This post will discuss models, views, and controllers, as well as templates, because they are so closely connected to views.
+Routing and components will be dscussed in a subsequent post.
 
 ## Models
 
