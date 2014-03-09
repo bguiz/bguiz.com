@@ -12,6 +12,16 @@ tags:
 - MVC
 ---
 
+## MVC + Templates
+
+Models, views, and controllers are one of the key components of a single-page application framework.
+
+![Model-View-Controller interactions](http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/200px-MVC-Process.svg.png)
+
+We discussed the MVC pattern, the history of single-page apps, 
+and also compared Angular models and Ember models in detail, in the previous post.
+This post continues from that with a comparison of views, controllers and templates in Angular and Ember.
+
 ## Views
 
 - Not much to say here, both frameworks defer most work to the templates
