@@ -13,6 +13,7 @@
 - sw-eng-philosophy
 	- Level of abstraction/ structure
 	- Opinionation
+	- Digest cycle and run loop
 - developer-productivity
 	- Dependency management
 	- Build tooling
