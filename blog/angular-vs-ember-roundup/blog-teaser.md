@@ -14,7 +14,7 @@ tags:
 - teaser
 ---
 
-While developing apps using BackboneJs, I have been itching to use a newer Javascript single page applications.
+While developing apps using BackboneJs, I have been itching to use a newer Javascript single-page application framework.
 If at least to find out if the tried-and-tested, battle proven, but often verbose and feature lacking BackboneJs is indeed worth continuing developing with.
 
 I had wanted to compare BackboneJs to AngularJs, EmberJs, and ReactJs.
