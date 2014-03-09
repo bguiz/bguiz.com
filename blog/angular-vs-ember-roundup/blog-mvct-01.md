@@ -1,6 +1,6 @@
 ---
 title: Models, Views, Controllers, and Templates in AngularJs and EmberJs
-slug: angularjs-vs-emberjs-mvc-template
+slug: angularjs-vs-emberjs-mvc-template-part-1
 author: bguiz
 date: 2014-03-08
 template: article.jade
@@ -42,7 +42,7 @@ and created an explosion in the amount of interactivity possible on a page.
 
 Web developers did exactly that, making their sites very interactive, 
 and thus was born the era of "Web 2.0" web sites. 
-However the client-side javascript quite often ended up becoming a tangled mess of unstructured Javascript and jQuery when the site tried to do something complex.
+However the client-side Javascript quite often ended up becoming a tangled mess of unstructured Javascript and jQuery when the site tried to do something complex.
 
 However, server side developers had been using the MVC pattern for some time now, 
 and there was no reason to not do so client side too. 
@@ -237,7 +237,7 @@ due to a combination of not being ready, and a lack of flexibility.
 
 There is currently a draft proposal in the ECMAScript 6,
 the standards specification for the next version of Javascript,
-for `Object.obseravable`.
+for `Object.observable`.
 It describes a means for all POJSOs to register listeners on property changes.
 This will obviate the need for wrapper objects around models.
 	
@@ -250,43 +250,6 @@ and thus it authors may choose to switch to using POJSOs instead.
 That being said, it is pertinent to remember that this is presently a proposal, and we do not know if or when this will happen,
 and more importantly, what the actual implementation and variation in adoption amongst the major browsers will be.
 
-## Views
+## Continued
 
-- Not much to say here, both frameworks defer most work to the templates
-- What is the syntax used to express views?
-- How do they interact with the controllers, models, and router?
-
-## Controllers
-
-- Controllers in AngularJs	
-	- What is the syntax used to express controllers?
-	- Does the framework have constructors? If not, what is in their place?
-	- Support for two-way data binding, between the models and views?
-	- Declartative or imperative?
-- Controllers in EmberJs	
-	- What is the syntax used to express controllers?
-	- Does the framework have constructors? If not, what is in their place?
-	- Support for two-way data binding, between the models and views?
-	- Declartative or imperative?
-
-## Templates
-
-- Templates in AngularJs	
-	- What is the syntax of the templates?
-	- What additional libraries are used
-	- Are the templates string based or DOM based?
-	- Are the templates easy to work with for designers who are not developers?
-- Templates in EmberJs	
-	- What is the syntax of the templates?
-	- What additional libraries are used
-	- Are the templates string based or DOM based?
-	- Are the templates easy to work with for designers who are not developers?
-
-## Discussion
-
-- Diagrams
-	- MVC interaction in EmberJs
-	- MVW interaction in AngularJs
-- How does everything fit together in AngularJs
-- How does everything fit together in EmberJs
-- Pros and Cons
+This post has gottent a little too long, so I'll split it. In part two, we will continue  with views, controllers and templates.
