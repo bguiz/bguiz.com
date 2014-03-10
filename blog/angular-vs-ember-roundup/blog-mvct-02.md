@@ -151,6 +151,90 @@ Unfortunately, [it is still in the works](http://discuss.emberjs.com/t/when-will
 
 ## Controllers
 
+Controllers are the glue that binds models to the views/ templates.
+They are responsible for manipulating the models,
+and also for responding to user interactions on the views.
+
+Two-way binding, present in both AngularJs and EmberJs,
+take care of most of the grunt work in these interactions,
+by specifying that a particular attribute on a model
+is "bound" to this particular part of the DOM within a view.
+However, only direct mappings can work like this;
+and controllers are necessary to define more complex interactions between the models and the views.
+
+### AngularJs controllers
+
+Controllers in Angular are not exactly controllers. 
+In fact Angular does not call itself an MVC framework, 
+[it calls itself an MVW (model-view-whatever) framework](http://plus.google.com/+AngularJS/posts/aZNVhj355G2) instead.
+(I would argue that the `$scope` object in any angular controller module is the actual controller)
+That being said, while they are not controllers from an academic point of view,
+from a practical point of view, they most certainly are.
+
+The syntax of defining a controller in an AngularJs app is like this:
+
+		angular.module('app', []).controller('FooCtrl', function($scope) {
+			$scope.someProperty = 'some initial value';
+			$scope.someAction = function() {
+				$scope.someProperty += '!';
+			};
+		});
+
+The `$scope` object is prototypically inherited from the `$scope` object of the parent object, 
+which in this case is the main app.
+It is made available to this controller through AngularJs' dependency injection framework.
+This in itself is a fascinating topic that warrants a discussion of its own,
+as it is a *beautiful* piece of software engineering architecture,
+and understanding it lies at the core of understanding AngularJs.
+Unfortunately, a discussion on this is not one of the criteria which we are comparing these frameworks upon.
+
+As mentioned earlier, two-way binding comes out of the box with AngularJs.
+
+		<div ng-controller="FooCtrl">
+			<button ng-click="someAction()">Exclaim harder!</button>
+			<p>Some property is {{someProperty}}</p>
+			<input type="text" value="{{someProperty}}"">
+		</div>
+
+In the above template, when AngularJs parses the DOM, 
+the `ng-controller` attribute is detected to have a name matching with the `ngController`directive, 
+which then knows to find the controller we have defined above.
+
+The `ng-click` directive, as well as the `{{someProperty}}` bound directive,
+are both within this "controlled" `<div>` and thus AngularJs know to look for `someAction` and `someAction` on the `$scope` belonging to the `FooCtrl` directive.
+
+The `ng-click` is fairly self-explanatory - 
+this directive evaluates the expression within the attribute value when the element is clicked.
+In this case, `$scope.someAction` gets invoked.
+
+The `{{someProperty}}` is slightly more complex,
+because there is a bit of magic going on behind the scenes -
+two-way binding magic!
+
+### AngularJs two-way binding
+
+When the user clicks on the `<button>`, the value of `someProperty` gets changed by the controller.
+Angular, having parsed the template prior, 
+knows that there are two parts of the DOM controlled by `FooCtrl` that are bound to this property;
+so it goes and updates them, and the view gets updated due to a change detected in the model.
+Now the user does something else - type into the text `<input>`.
+Angular knows that this property is within the `FooCtrl` controller, and updates the value of of the property on its `$scope`.
+This is an update of the model due to a change detected in the view.
+(subsequently, that model change triggers another update in the view).
+
+This is AngularJs' two-way binding in action.
+As apps get more complex,
+it becomes more important to know how two-way binding works, so as not to break it.
+The canonical use case is when you have a property on `$scope`,
+but that property is too complex to be included in the dirty checking performed in each digest cycle.
+You need to manually notify AngularJs of when your property has been updated,
+so that the two-way binding between the model of that property,
+and its representation within its view still is bound in both directions.
+This is accomplished through `$watch` and `$apply`,
+and using them correctly is contingent upon understanding how two-way binding works.
+
+### EmberJs controllers
+
 - Controllers in AngularJs
 	- What is the syntax used to express controllers?
 	- Does the framework have constructors? If not, what is in their place?
