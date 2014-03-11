@@ -10,6 +10,8 @@
 	- Components
 - testing
 	- Testability
+- SEO
+	- Crawlability
 - sw-eng-philosophy
 	- Level of abstraction/ structure
 	- Opinionation
