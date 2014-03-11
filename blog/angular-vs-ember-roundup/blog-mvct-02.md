@@ -265,5 +265,108 @@ not just each time it needs tobe re-computed.
 
 ### EmberJs controllers
 
+EmberJs supports controllers that conform to the MVC pattern.
+
+The syntax of defining a controller in an EmberJs app is like this:
+
+		App.FooController = Ember.Controller.extend({
+			someProperty: 'some initial value',
+
+			actions: {
+				someAction: function() {
+					this.set('someProperty', this.get('someProperty') + '!');
+				}
+			}
+		});
+
+As we can see in the code above, 
+there is a clean separation between properties and actions, with all actions grouped within the `actions` object in the controller.
+
+It is worth noting here that EmberJs controllers distinguish between properties on the controllers,
+and models used by the same controllers.
+Models are created and passed into a controllers using `Ember.Route` objects,
+which we will cover when we cover routing in EmberJs.
+This is because there is only one instance of any controller instantiated,
+and thus its state does *not* get reset each time.
+This is an important point to note,
+and it can be a source of confusion at first.
+To compound this confusion,
+`Ember.Controller` is typically not used,
+instead we use `Ember.ObjectController` and `Ember.ArayController`,
+depending on whether the model is a single object or a collection of objects,
+and these types of controllers proxy the properties of their models.
+
+Another thing worth noting is that we had to name this controller `"FooController"`.
+In AngularJs, we were free to name our controller anything we wanted - 
+`"FooBarCtrl"` would have worked just as well as `"FooCtrl"`.
+In EmberJs, however, we must name our controllers (and most other objects actually), according to their naming convention.
+This is a common gotcha, and sometimes you will be left scratching your head
+as to why your code does not appear to have any effect.
+To be fair, you can override this behaviour and specify your own naming strategy,
+but most EmberJs app develpers will simply just conform to the prescribed naming conventions.
+
+## EmberJs two-way binding
+
+		<div>
+			<button {{action 'someAction'}}>Exclaim harder!</button>
+			<p>Some property is {{someProperty}}</p>
+			{{input type="text" value=someProperty}}
+		</div>
+
+Two-way binding in EmberJs works in a very similar fashion to the way it works in EmberJs,
+so we will only cover the differences.
+
+Two-way bindings in markup work as expected, e.g. `{{someProperty}}`.
+However, they do not work very well with element attributes.
+In this case, we see that instead of just binding to the `value` attribute of input element,
+we need to invoke a special Handlebars helper linked to a built in EmberJs view called input.
+This is actually the recommended way to do this.
+It gets more complicated when there is no bilt in helper or view.
+In this case you will need to use `{{bind-attr}}`.
+We have covered some of this in the section about EmberJs templates.
+
+The implications of this is that binding is much more complex in EmberJs than it is in AngularJs, 
+simply because there is more syntax to learn.
+
+#### EmberJs controllers: Imperative vs declarative
+
+Two-way bound properties in EmberJs are declarative, just as they are in AngularJs.
+
+Properties in EmberJs are declarative too:
+
+		App.FoosController = Ember.ArrayController.extend({
+			filterText: '',
+
+			filteredModel: function() {
+				var foos = this.get('model'), filterText = this.get('filterText');
+				//compute a filtered version of the foos array, and return it
+			}.property('filterText'),
+
+			actions: {
+				someAction: function() {
+					this.set('someProperty', this.get('someProperty') + '!');
+				}
+			}
+		});
+
+Here we define a property that is dependant on another property,
+with a fairly complex computation (filtering an array's contents).
+This is possible to do because we know that we know that EmberJs will
+only perform the recomputation only when a property changes.
+This is possible because EmberJs supports the concept of computed properties,
+that is what the syntax of calling `.property()` on the function does -
+the function is now marked as a property, 
+and thus can be referred to as a property int he template,
+which is a great example of ???[command-query separation]().
+If this call to property `.property()` contains any arguments,
+EmberJs knows that that property should be recomputed whenever those other properties are changed,
+and thus is a computed property.
+
+TODO it isn't command query separattion, but a parallel concept
+
+This way of defining computed properties is a lot more succinct, 
+than using `$watch` on AngularJs controller scope;
+and is much more elegant, and easier to understand.
+
 ## Discussion
 
