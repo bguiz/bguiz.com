@@ -188,12 +188,14 @@ as it is a *beautiful* piece of software engineering architecture,
 and understanding it lies at the core of understanding AngularJs.
 Unfortunately, a discussion on this is not one of the criteria which we are comparing these frameworks upon.
 
+## AngularJs two-way binding
+
 As mentioned earlier, two-way binding comes out of the box with AngularJs.
 
 		<div ng-controller="FooCtrl">
 			<button ng-click="someAction()">Exclaim harder!</button>
 			<p>Some property is {{someProperty}}</p>
-			<input type="text" value="{{someProperty}}"">
+			<input type="text" value="{{someProperty}}">
 		</div>
 
 In the above template, when AngularJs parses the DOM, 
@@ -211,7 +213,7 @@ The `{{someProperty}}` is slightly more complex,
 because there is a bit of magic going on behind the scenes -
 two-way binding magic!
 
-### AngularJs two-way binding
+#### AngularJs two-way binding
 
 When the user clicks on the `<button>`, the value of `someProperty` gets changed by the controller.
 Angular, having parsed the template prior, 
@@ -233,25 +235,35 @@ and its representation within its view still is bound in both directions.
 This is accomplished through `$watch` and `$apply`,
 and using them correctly is contingent upon understanding how two-way binding works.
 
+#### AngularJs controllers: Imperative vs declarative
+
+When looking at the syntax, one thing worth analysing is where it sits
+on the imperative to declarative spectrum.
+
+When you declare an attribute on the `$scope` of the of the controller,
+and then use directives or markup to bind to them,
+two-way binding occurs.
+In this situation, you merely declare that this property is linked to that part of a template,
+and this two-way binding is declarative.
+
+When you want to do something a little more complicated,
+where two-way binding is not sufficient, however,
+declarative syntax is no longer possible.
+For example, if we want to express a relationship between one property and another on the same controller,
+or on multiple others.
+To accomplish this, we need to create a function that updates the relevant properties.
+We then need to set a call `$scope.$watch` to observe for changes on the input property,
+and provide it with a callback function that would then update the output property.
+In this situation, you do not declare the relationship between one property and another,
+instead you are imperatively describing the computation.
+
+As a footnote, it is worth pointing out that instead of having a property on a scope, 
+we could just have a function on the scope that gets called and simply returns the computed value.
+This, however, is not ideal for anything more than the simplest of computed properties,
+because it will be called upon every digest cycle,
+not just each time it needs tobe re-computed.
+
 ### EmberJs controllers
 
-- Controllers in AngularJs
-	- What is the syntax used to express controllers?
-	- Does the framework have constructors? If not, what is in their place?
-	- Support for two-way data binding, between the models and views?
-	- Declartative or imperative?
-- Controllers in EmberJs
-	- What is the syntax used to express controllers?
-	- Does the framework have constructors? If not, what is in their place?
-	- Support for two-way data binding, between the models and views?
-	- Declarative or imperative?
-
 ## Discussion
-
-- Diagrams
-	- MVC interaction in EmberJs
-	- MVW interaction in AngularJs
-- How does everything fit together in AngularJs
-- How does everything fit together in EmberJs
-- Pros and Cons
 
