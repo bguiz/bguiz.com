@@ -1,3 +1,17 @@
+---
+title: Models, Views, Controllers, and Templates in AngularJs and EmberJs
+slug: angularjs-vs-emberjs-mvc-template-part-2
+author: bguiz
+date: 2014-03-09
+template: article.jade
+tags:
+- angularjs
+- emberjs
+- single-page-apps
+- comparison
+- MVC
+---
+
 - roundup
 - criteria
 - mvc-and-templates
