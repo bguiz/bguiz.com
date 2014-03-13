@@ -15,7 +15,25 @@ tags:
 
 ## Routing
 
-- define routing
+Routing is a mechanism through which keeps the state of the application in sync with the URL.
+That is, when the URL changes, the application is notified to change to a new state,
+and conversely, when the application changes to a new state,
+it updates the URL.
+
+If this sounds like familiar territory, that is because it is!
+Whenever we use a traditional web site -
+where the page refreshes upon each navigation -
+this was the only paradigm that was available.
+When you navigate to a new page, you expected the URL to change.
+
+Why is routing important, and why does it continue to be needed in single page apps?
+
+- It is what we are used to - when the app goes to a different "page" we expect the URL to change
+- Browser history - we expect to be able to use back and forwardbuttons in order tobe able to navigate within the app
+- URL sharing - we have an expectation that copy-pasting the URL and sharing it with someone else will bring them to a similar state within the app. This is known as deep linking.
+- Deep link within packaged apps - single page web apps can be packaged using tools like PhoneGap into native apps. Deep linking within these apps is also possible, if they use routing too.
+
+Let us take a look at how routing is implmented in AngularJs and EmberJs.
 
 ### AngularsJs Routing
 
