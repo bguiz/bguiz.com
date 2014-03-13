@@ -66,6 +66,63 @@ in the router we name the controller,
 and the template (which is effectively the view),
 and we know that the controller contains logic that will obtain the model.
 
+#### URLs in single-page apps
+
+In single-page apps, the URL is technically always the same.
+That is because, we are *technically* staying on the same page,
+and merely *pretending* to navigate between different pages by using lots of Javascript.
+
+However, this would means that we would lose all the benefits of our app being URL-driven,
+and thus we need a way to overcome this.
+Thankfully there are a couple of ways to do so -
+one which works on all browsers,
+and another which will only work with browsers that support HTML5
+
+The **first method** is using hash fragments.
+
+These have been around since the early days of the internet,
+where you would have links that did not link to a different page, 
+but rather a different position on the page.
+When you clicked on them, your browser would merely scroll to a different position on the page.
+The other thing you would observeis that the URL would get suffixed with '`#`', followed by the name of that link.
+Browsers would store these changes in hash fragments in their history,
+and thus it was possible to use the back and forward buttons to jump between the different scroll positions on the page.
+
+Try it out for yourself!
+Go to any article on [Wikipedia](http://en.wikipedia.org) and find citations in line with the text.
+Many of these are hyperlink that will jump you down to the bottom of the page.
+Click on a few of these in a row, and then use the back and forward buttons.
+Neat right?
+
+Well, when the developers of AJAX-heavy Web 2.0 sites,
+and later on developers of single-page application frameworks saw this,
+they thought so too.
+They decided to use this as a means to store the identity of the app's current state,
+thus enabling routing to occur, even though the user does not *technically* move away from the one page.
+All they had to this idea to get full blown routing was instead of using single words or numbers for IDs,
+instead simply use a string that was effectively the URL for the current route within the app,
+e.g. "`#/foo/123`" or "`#/foo/123/edit`"
+
+The **second method** is to use the history API.
+The history API is a far more recent thing,
+as it is part of the HTML5 specification.
+Only newer browsers support this specification,
+unlike hash fragments, which understood by pretty much every browser today.
+
+It is not very much different from the hash fragment means of storing the application state in the URL.
+All it really does, is provide a way to tell the server that this particular URL path is served by an app that is history API enabled,
+and therefore, the rest of the string in the path that comes after it should be ignored by the server,
+and merely passed on the page serving the app.
+The app then obtains the remainder of the path that was passed by the server,
+via the history API, and uses that just as it would the hash fragment URLs described earlier.
+
+How is the end result different?
+Well, the obvious difference is that the end user does not see the hash fragment -
+the URLs that change when navigating between different states within a single-page app, 
+they may as well be a traditional web site.
+The end user will not perceive the difference.
+There are a few other minor difference as well (which we will not go into).
+
 - syntax router
 - HTML5 history API support
 - finite state machine
