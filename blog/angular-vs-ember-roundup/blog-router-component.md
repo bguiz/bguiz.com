@@ -37,7 +37,37 @@ Let us take a look at how routing is implmented in AngularJs and EmberJs.
 
 ### AngularsJs Routing
 
+In an AngularJs app, you can set up routing very quickly and easily. Here is the syntax:
+
+		App.config(function($routeProvider) {
+			$routeProvider
+				.when('/foo', {
+					controller: 'FooCtrl',
+					templateUrl: 'foo.template.html'
+				})
+				.when('/bar', {
+					controller: 'BarCtrl',
+					templateUrl: 'bar.template.html'
+				})
+				.otherwise({
+					redirectTo: '/foo'
+				});
+		});
+
+It is so simple, that it is self-explanatory, really, but we shall just go through the key bits.
+AngularJs comes with a built-in module `$routeProvider` through which provides routing capabilty.
+This module merely needs to be configured by the developer.
+At the bottom, we provide a "catch-all" or default route that will redirect to one of the known routes.
+We provide a mapping between URLs and states that correspond to them.
+Here each state is defined as a controller and a template.
+Note that the state is actually represented by a model, a view, and a controller - 
+essentially an MVC state -
+in the router we name the controller,
+and the template (which is effectively the view),
+and we know that the controller contains logic that will obtain the model.
+
 - syntax router
+- HTML5 history API support
 - finite state machine
 - ui-router
 
@@ -45,6 +75,7 @@ Let us take a look at how routing is implmented in AngularJs and EmberJs.
 
 - syntax router
 - syntax routes
+- HTML5 history API support
 - hierarchical state machine
 - hierarchical routes demo
 
