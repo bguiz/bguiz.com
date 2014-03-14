@@ -15,10 +15,9 @@ tags:
 
 ## Routing
 
-Routing is a mechanism through which keeps the state of the application in sync with the URL.
-That is, when the URL changes, the application is notified to change to a new state,
-and conversely, when the application changes to a new state,
-it updates the URL.
+Routing is a mechanism which keeps the state of a web application in sync with its URL.
+That is, when its URL changes, the app is notified to transition to a new state.
+Conversely, when the app transitions to a new state, it updates its URL.
 
 If this sounds like familiar territory, that is because it is!
 Whenever we use a traditional web site -
@@ -72,7 +71,7 @@ In single-page apps, the URL is technically always the same.
 That is because, we are *technically* staying on the same page,
 and merely *pretending* to navigate between different pages by using lots of Javascript.
 
-However, this would means that we would lose all the benefits of our app being URL-driven,
+However, this would mean that we would lose all the benefits of our app being URL-driven,
 and thus we need a way to overcome this.
 Thankfully there are a couple of ways to do so -
 one which works on all browsers,
