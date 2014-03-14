@@ -1,0 +1,22 @@
+---
+title: Making Maven Grunt, Redux
+slug: making-maven-grunt-redux
+author: bguiz
+date: 2014-03-15
+template: article.jade
+tags:
+- maven
+- maven-plugin
+- grunt
+- bower
+---
+
+- addy osmani's article on making maven grunt
+	- skip right to the end, the firts few solutions are rather inadequate
+- but this is not enough, at least on windows
+- S/O question - learning how to add plugins
+	- phases
+	- goals
+- S/O question - learning windows peculiarities
+	- discovery process
+	- solution 
