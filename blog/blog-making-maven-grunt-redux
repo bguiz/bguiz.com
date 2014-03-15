@@ -11,8 +11,23 @@ tags:
 - bower
 ---
 
+Recently, I needed to make a single-page web app that would be served by a Java backend.
+That would be as simple as copying the static files into the relevant folder, right?
+Well, as it turns out, not quite so simple,
+as each project uses a different build system.
+
+Single-page web apps are typically built using the Grunt and Bower toolchain,
+which are NodeJs scripts.
+Java web apps are typically built using either the Ant or Maven toolchains.
+
+[Making Maven Grunt](http://addyosmani.com/blog/making-maven-grunt/)
+
+[Maven plugins not running](http://stackoverflow.com/questions/22392669/maven-exec-maven-plugin-and-maven-resources-plugin-not-running-not-sure-why)
+
+[exec plugin cannot find files on path](http://stackoverflow.com/questions/22393785/exec-maven-plugin-says-cannot-run-specified-program-even-though-it-is-on-the-pa)
+
 - addy osmani's article on making maven grunt
-	- skip right to the end, the firts few solutions are rather inadequate
+	- skip right to the end, the firts few solutions are rather inadequate or restrictive
 - but this is not enough, at least on windows
 - S/O question - learning how to add plugins
 	- phases
