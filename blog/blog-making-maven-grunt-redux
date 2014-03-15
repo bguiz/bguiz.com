@@ -53,7 +53,18 @@ as I was already using two other build systems and their syntaxes -
 and thus reluctant to throw a third into the mix;
 `exec-maven-plugin` it was!
 
-[Maven plugins not running](http://stackoverflow.com/questions/22392669/maven-exec-maven-plugin-and-maven-resources-plugin-not-running-not-sure-why)
+## Why don't my plugins run?
+
+I asked a question on Stackoverflow:
+["Maven exec-maven-plugin and maven-resources-plugin not running, not sure why"](http://stackoverflow.com/q/22392669/194982)
+
+Excuse the newbie question - this was my first time using maven after all!
+
+When including a maven plugin,
+you define a list of `<executions>`.
+I thought that defining a `<phase>` for each `<execution>` was sufficient to trigger them.
+What I learnt here was that it was not.
+It is necessary to define at least one `<goal>` for the plugin to get invoked.
 
 [exec plugin cannot find files on path](http://stackoverflow.com/questions/22393785/exec-maven-plugin-says-cannot-run-specified-program-even-though-it-is-on-the-pa)
 
