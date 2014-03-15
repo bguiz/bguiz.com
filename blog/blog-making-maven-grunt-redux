@@ -66,14 +66,54 @@ I thought that defining a `<phase>` for each `<execution>` was sufficient to tri
 What I learnt here was that it was not.
 It is necessary to define at least one `<goal>` for the plugin to get invoked.
 
-[exec plugin cannot find files on path](http://stackoverflow.com/questions/22393785/exec-maven-plugin-says-cannot-run-specified-program-even-though-it-is-on-the-pa)
+## Why can't my plugin find executbles?
 
-- addy osmani's article on making maven grunt
-	- skip right to the end, the firts few solutions are rather inadequate or restrictive
-- but this is not enough, at least on windows
-- S/O question - learning how to add plugins
-	- phases
-	- goals
-- S/O question - learning windows peculiarities
-	- discovery process
-	- solution 
+A follow up question, also on Stackoverflow:
+[exec-maven-plugin says cannot run specified program, even though it is on the PATH](http://stackoverflow.com/q/22393785/194982)
+
+Now this one was not a newbie questions at all - it turned out to be a Windows-specific bug.
+
+Basically, even though entering `grunt` on the command line worked, because it was on the path,
+when the maven plugin ran, it failed to find it.
+
+After much tinkering, and inspecting the source code of `exec-maven-plugin`,
+I found whatt I think is a bug in the plugin:
+
+		CommandLine toRet;
+		if ( OS.isFamilyWindows() && exec.toLowerCase( Locale.getDefault() ).endsWith( ".bat" ) )
+		{
+		    toRet = new CommandLine( "cmd" );
+		    toRet.addArgument( "/c" );
+		    toRet.addArgument( exec );
+		}
+		else
+		{
+		    toRet = new CommandLine( exec );
+		}
+
+It assumes that only commands that invoke `.bat` files need to be prepended with `cmd /c`.
+
+I checked the `npm` path, where the links to all the global installed NodeJs libraries are,
+i.e. the ones installed using `npm install -g`,
+and found that it had, for each,
+a Unix shell script, with no extension,
+and a Windows batch script, with a `.cmd` extension.
+
+*Fixing the problem*
+
+Normally I would have fixed the problem by patching the bug in `exec-maven-plugin`.
+However, it was using a `svn` instead of `git`, and using `xircles` instead of `github`.
+I did give those a go, but I the web iterface took more than a minute to load (kid not!),
+and that was all it took for me to start looking for another way to solve the problem.
+
+Quick and easy way was to rename the `.cmd` files to `.bat` files,
+since they were batch script files anyway,
+and everything magically began working once more.
+
+See [my answer](http://stackoverflow.com/a/22395703/194982) for a more detailed explanation.
+
+## Rant over
+
+That has been half rant, half learning experience.
+I must say, I wish that a rather simple task like this were a little easier.
+Hopefully this helps anyone else trying to use maven with grunt, on Windows.
