@@ -20,7 +20,17 @@ Single-page web apps are typically built using the Grunt and Bower toolchain,
 which are NodeJs scripts.
 Java web apps are typically built using either the Ant or Maven toolchains.
 
-[Making Maven Grunt](http://addyosmani.com/blog/making-maven-grunt/)
+So, should we replace the build tool of with the build tool of the other,
+or should we just make one of themtalk to the other?
+Addy Osmani has an article, [Making Maven Grunt](http://addyosmani.com/blog/making-maven-grunt/),
+whichdescribes this situation quite succinctly:
+
+"More times than not, it's the back-end team who will define the build process and end up having to wrangle your front-end code into there."
+
+"Whilst there are many plugin options for JavaScript processing in the Maven world, these plugins can be a real chore to create, maintain and update. In addition, they often have outdated dependencies – meaning you need to monkey-patch them to work and developers – especially those not coming from a Java background – dislike it."
+
+Thus it appears that in order to get the best of both worlds,
+the best option would be to create the bridge that allows one build system to talk to the other.
 
 [Maven plugins not running](http://stackoverflow.com/questions/22392669/maven-exec-maven-plugin-and-maven-resources-plugin-not-running-not-sure-why)
 
