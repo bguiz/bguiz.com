@@ -117,10 +117,50 @@ via the history API, and uses that just as it would the hash fragment URLs descr
 
 How is the end result different?
 Well, the obvious difference is that the end user does not see the hash fragment -
-the URLs that change when navigating between different states within a single-page app, 
-they may as well be a traditional web site.
-The end user will not perceive the difference.
-There are a few other minor difference as well (which we will not go into).
+the URLs that change when navigating between different states within a single-page app.
+This single-page app may as well be a traditional web site, 
+the end user will not perceive the difference.
+There are a few other minor difference as well
+(which we will not go into).
+
+*The 'finite' in finite state machine*
+
+Earlier we mentioned that the routing, at an abstract or conceptual level,
+is implemented using state machines.
+We also mentioned that AngularJs' `$routeProvider` is implemented a finite state machine.
+
+We have, however, glossed over one very important detail,
+and that is that there are dfferent types of state machine.
+A finite state machine being just one of them.
+
+The other common type of state machine is the hierarchical state machine.
+This is also the type of state machine that EmberJs uses,
+and so we will look into them in more detail then.
+
+A hierarchical state machine allows for some states to be nested within others,
+in a hierarchy of substates, that together form a composite state.
+
+What impact does the choice of a finite state machine over a hierarchical state machine have,
+on apps built with AngularJs though?
+As it turns out, quite a significant one.
+In traditional web applications, most pages would share common sections, such as the header, footer, navigation menu, or side bars.
+Amongst the more complex of these, the content area would contain a certain level of overlap.
+Single-page application frameworks also support this concept.
+
+In AngularJs you may apply the `ngView` directive to a DOM element.
+When the URL changes, the new state's template and controller are determined,
+and the contents of that elements are replaced with what this template an controller say should be there.
+
+Since the router defines a series of finite states,
+that `ngView` can only ever be driven my one active controller and template,
+and it is not possible to have multiple ones active at the same time,
+at least without an in-depth knowledge of AngularJs' inner workings.
+
+This can be quite limiting, and this is a serious limitation of using AngularJs.
+Thankfully there is the [ui-router](https://github.com/angular-ui/ui-router) library,
+which provides a hierarchical state machine driven router for AngularJs apps.
+Some from the AngularJs team have also drafted this proposal on [router design in AngularJs 2.0](https://groups.google.com/forum/#!topic/angular-dev/mO6jmYhvsMk), which draws inspiration from both `ui-router` and EmberJs' router (and a few others);
+thus AngularJs may support this in the future as it appears that its community wants this.
 
 - syntax router
 - HTML5 history API support
