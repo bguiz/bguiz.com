@@ -174,18 +174,52 @@ The two primary differences are that:
 
 		App.Router.map(function() {
 			this.resource('foos', function() {
-				this.resource('foo', {path: '/:foo_id'});
+				this.route('foo', {path: '/:foo_id'});
 			});
-			this.resource('bar');
+			this.route('bar');
 		});
 
 The syntax is a little more complex.
 To understand how routing works in EmberJs,
-it is necessary to first understand EmberJs' philosophy on convention over configuration.
+it is necessary to first understand EmberJs' philosophy on convention over configuration -
+in particular, its naming conventions.
 
 When you instantiate a new app using 
 `var App = Ember.Application.create({})`,
 the framework will create a `Router` object, `App.Router`.
+This is the first of many naming conventions.
+
+What remains is for us to tell the router which URLs correspond to which states.
+This is done using the `map` function on the `Router` object.
+The map function takes in a function as its first parameter.
+Within this function, call `this.resource` and `this.route` in a hierarchy,
+with `this.route` at the leaf nodes, and `this.resource` when there are child nodes.
+Both functions take in a string as the first parameter
+That string is,by default, a section of the URL.
+
+That string is also what EmberJs will use as the input for other objects that represent the state.
+The naming conventions are described in detail in the 
+[EmberJs guides](http://emberjs.com/guides/concepts/naming-conventions/).
+
+- URL: `/`
+	- Route: `IndexRoute`
+	- Controller: `IndexController`
+	- Template: `index`
+- URL: `/foos`
+	- Route: `FoosRoute`
+	- Controller: `FoosController`
+	- Template: `foos`
+- URL: `/foos/123`
+	- Route: `FooRoute`
+	- Controller: `FooIndexController`
+	- Template: `foo/index`
+
+This is actually a little hard to grok, and this 
+[EmberJs routes guide](http://emberjs.com/guides/routing/defining-your-routes/)
+is a detailed, but excellent reference, essential in determining what you should name your `Route`s, `Controller`s and templates.
+If your name them any differently from what EmberJs expects them to be named,
+they simply are not found, and defaults are used instead.
+This is quite difficult at first, as it is quite easy to get these names wrong.
 
 - syntax router
 - syntax routes
