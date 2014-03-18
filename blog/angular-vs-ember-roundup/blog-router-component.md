@@ -160,14 +160,32 @@ This can be quite limiting, and this is a serious limitation of using AngularJs.
 Thankfully there is the [ui-router](https://github.com/angular-ui/ui-router) library,
 which provides a hierarchical state machine driven router for AngularJs apps.
 Some from the AngularJs team have also drafted this proposal on [router design in AngularJs 2.0](https://groups.google.com/forum/#!topic/angular-dev/mO6jmYhvsMk), which draws inspiration from both `ui-router` and EmberJs' router (and a few others);
-thus AngularJs may support this in the future as it appears that its community wants this.
-
-- syntax router
-- HTML5 history API support
-- finite state machine
-- ui-router
+thus AngularJs may support this in the future as it appears that the community is behind it.
 
 ### EmberJs Routing
+
+In EmberJs, routing keeps the state of the web app in sync with the current URL.
+
+Routing in EmberJs, compared to routing in AngularJs, is significantly more complex.
+The two primary differences are that:
+
+- The responsibility for routing is split between a `Router` object and multiple `Route` objects, and they have more responsibilities.
+- Routing uses a heirarchical state machine, and composite states need to be considered.
+
+		App.Router.map(function() {
+			this.resource('foos', function() {
+				this.resource('foo', {path: '/:foo_id'});
+			});
+			this.resource('bar');
+		});
+
+The syntax is a little more complex.
+To understand how routing works in EmberJs,
+it is necessary to first understand EmberJs' philosophy on convention over configuration.
+
+When you instantiate a new app using 
+`var App = Ember.Application.create({})`,
+the framework will create a `Router` object, `App.Router`.
 
 - syntax router
 - syntax routes
@@ -181,7 +199,7 @@ thus AngularJs may support this in the future as it appears that its community w
 
 ## Components
 
-- define compnonents
+- define componnents
 - web components spec
 
 ### AngularJs components
