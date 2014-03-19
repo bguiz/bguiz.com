@@ -221,6 +221,50 @@ If your name them any differently from what EmberJs expects them to be named,
 they simply are not found, and defaults are used instead.
 This is quite difficult at first, as it is quite easy to get these names wrong.
 
+#### Route hierarchies
+
+The second part of the picture in routing in EmberJs are the `Route` objects.
+
+		App.FoosRoute = Ember.Route.extend({
+			model: function() {
+				return [{name: 'f1'}, {name: 'f2'}, {name: 'f3'}];
+			}
+		});
+
+Most `Route` object simply will implement the `model` hook to return the model.
+If the corresponding controller is an `ArrayController`,
+the model is expected to be an `Array`.
+If the corresponding controller is an `ObjectController`,
+the model is expetced to be an `Object`.
+However, it is most likely that your app does not want to use hard coded models like so.
+Most likely, you will want to dynamically load data from a server,
+using AJAX.
+There are libraries which cover this quite well, 
+such as Ember Data and Ember Model.
+However, it is possible to use AJAX directly without wrapping the objects in a model object.
+
+		App.FoosRoute = Ember.Route.extend({
+			model: function() {
+				var req = Ember.RSVP.resolve(jQuery.getJSON('/will/404'));
+				return req.then(function resolve(response) {
+					return response.foos;
+				});
+			}
+		});
+
+Here we use `jQuery` to perform the AJAX request.
+AJAX requests, are, of course, asynchronous,
+and thus they need to be handled using either callbacks or promises,
+and in EmberJs, we will use promises,
+as EmberJs uses promises for all async return types.
+JQuery does itself return a promise-like object,
+however, it is not fully compiant with the Promises/A+ specification,
+which EmberJs requires.
+Thus we need to wrap it with `Ember.RSVP.resolve`,
+a utility function from EmberJs' own internal promises library.
+
+??? Side bar on what a promise is
+
 - syntax router
 - syntax routes
 - HTML5 history API support
