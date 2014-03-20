@@ -380,4 +380,16 @@ The hardest part of it really is just getting used to the naming conventions.
 ## Discussion
 
 Unlike AngularJs, no external libraries are necessary to meet routing needs,
-the one that it comes with is 
+the one that EmberJs comes with is powerful enough to handle most use cases.
+
+AngularJs' routing syntax is a lot less complex and involved,
+and is best for simple apps.
+EmberJs' routing syntax is a lot more complex,
+but with the added complexity comes a lot of additional features.
+
+AngularJs' routing does not do very much different from very basic routing implementations,
+such as BackboneJs' implementation, and comes across as an afterthought.
+EmberJs' routing is a huge improvement over simple routing implementations;
+and the developers of EmberJs consider it to be the most important part of any EmberJs app.
+
+When it comes to routing, EmberJs' approach shines, and AngularJs' approach pales in comparison.
