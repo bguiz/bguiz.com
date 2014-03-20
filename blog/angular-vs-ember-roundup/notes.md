@@ -1,24 +1,3 @@
-## Criteria
-
-- Learning curve
-- Models
-- Views
-- Controllers
-- Router
-- Templating
-- Components
-- Dependency management
-- Build tooling
-- Opinionation
-- Development tooling
-- Dependencies
-- Community
-- Track record
-- Contributions
-- Maturity
-- Level of abstraction/ structure
-- Testability
-
 ## AngularJs
 
 ### Learning curve
