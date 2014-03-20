@@ -262,8 +262,53 @@ however, it is not fully compiant with the Promises/A+ specification,
 which EmberJs requires.
 Thus we need to wrap it with `Ember.RSVP.resolve`,
 a utility function from EmberJs' own internal promises library.
+This is a really annoying gotcha when just starting out with EmberJs,
+and it would be a good idea if this was better documented,
+or if EmberJs ships with its own AJAX constructs,
+like what AngularJs does with its `$http` module.
 
-??? Side bar on what a promise is
+#### Promises and async
+
+When we get data over the network in a single-page app,
+we use AJAX - asynchronous Javascript and XML.
+This is accomplished using a native code wrapped in a global Javascript object, `XMLHttpRequest`.
+Javascript has been single threaded from the get-go,
+and only recently, in the ECMAScript 6 spec,
+and this poses a fundamental problem for AJAX.
+We cannot halt the execution of the rest of the app,
+while waiting for the response to come back from the server,
+as it certainly takes a noticeable amount of time.
+
+Thus we need a way to execute code asynchronously.
+This is solved using callback functions,
+where we pass in a reference to a function to the `XMLHttpRequest`,
+and then simply put code to handle the response (or error message in the case of rejection) in that function.
+Combined with Javascript's concept of closures,
+this allows us to *emulate* multi-threaded programming concepts quite well.
+
+That being said, callbacks do have their limitations.
+Their limitations led to the development of a concept called promises,
+which are clever wrappers around callbacks which provide a very nice interface to work with asynchronous code -
+much nicer than callbacks.
+
+If you would like to know more about the frustrations of using callbacks - 
+and in using promises too - check out my [presentation on qryq](http://bguiz.github.io/qryq),
+a NodeJs library I wrote to help with [managing promises with dependencies between them](http://github.com/bguiz/qryq).
+
+For these reasons, and others, the more modern Javascript frameworks
+have embraced promises as their go to means of managing asynchronous code.
+AngularJs and EmberJs both have their own promise libraries embeddedwithin them.
+AngularJs uses `q` (which [`qryq`](http://github.com/bguiz/qryq) also uses),
+and EmberJs uses `Ember.RSVP`.
+
+The difference between AngularJs and EmberJs is not really much,
+because both of their promise library implementations follow the same specification,
+the Promises/A+ spec.
+However, the difference between these two frameworks lies in their flexibility.
+In AngularJs, you can avoid using promises if you do not wish to, the choice is yours.
+With EmberJs on the other hand, for anything asynchronous, it would be extremely hard to avoid using promises.
+Thus if you have existing Javascript code that uses callbacks,
+in EmberJs, be prepared to rewrite them using promises.
 
 - syntax router
 - syntax routes
