@@ -221,7 +221,7 @@ If your name them any differently from what EmberJs expects them to be named,
 they simply are not found, and defaults are used instead.
 This is quite difficult at first, as it is quite easy to get these names wrong.
 
-#### Route hierarchies
+#### Routes
 
 The second part of the picture in routing in EmberJs are the `Route` objects.
 
@@ -310,15 +310,73 @@ With EmberJs on the other hand, for anything asynchronous, it would be extremely
 Thus if you have existing Javascript code that uses callbacks,
 in EmberJs, be prepared to rewrite them using promises.
 
-- syntax router
-- syntax routes
-- HTML5 history API support
-- hierarchical state machine
-- hierarchical routes demo
+#### Hierarchical Routes
 
-- What is the syntax used to express a router?
-- Does the router support a flat or hierarchical series of routes?
-- What additional libraries do you need to use the router?
+AngularJs routing uses a finite state machine under the hoode.
+EmberJs routing, on the other hand, uses ahierarchical stae machine under the hood.
+The difference between these two is evident when inspecting the routers.
+In AngularJs' router syntax, using `$routeProvider`, 
+we see that all states are define at the same level.
+In EmberJs' router syntax, using `Ember.Router.map`, 
+we see that states might define other states "nested" within them.
+This is where the hierarchy comes into play.
+
+This `map` function tells Ember how to define the hierarchy of URL fragments.
+The composite of these URL fragments is obtained by concatenating these strings together.
+That is one side of the equation - the URLs.
+
+The second half of the equation is comprised of the state.
+This state consists of a `Route`, a model, a `View` plus its template, and a `Controller`.
+But where do we provide these mappings?
+That is where the EmberJs' naming conventions come in!
+
+When we define a route mapping like this:
+
+		this.route('bar');
+
+EmberJs knows to look for `FooRoute`, use the model returned by its `model` hook, `FooView` and a template named `foo`, and finally `FooController`.
+
+Alternatively, when we define a route mapping like this:
+
+		this.route('foo', {path: '/:foo_id'});
+
+The same naming conventions as above apply,
+except that we have overridden the default URL fragment -
+instead of `/foo`, it will be `/:foo_id`, a dynamic fragment.
+It is also possible to similarly override the defaults for the objects that comprise the state too.
+
+Assembling these states together into a composite state
+is not quite as assembling the composite URL for that state,
+but it is quite a powerful tool to have when building a web app.
+
+EmberJs simply keeps all the current `Route`s, models, `View`s, and `Controller`s
+defined by each of the active states active at the saem time to accomplish this.
+Templates are slightly more complex.
+In summary, for multiple templatesto be active in a hierarchy, 
+each one must be defined within the others.
+This is accomplished using the Handlebars helper, `{{outlet}}`.
+That simply tells the current template that,
+when its `Route`'s child `Route` is active,
+the template belonging to that child `Route` should be rendered where `{{outlet}}` is.
+
+One common pattern that this enables is the master-detail pattern.
+This is where the user interface displays a list of items,
+perhaps just the name and one other piece of information about each item,
+in one section of the page,
+and when each of these is clicked on,
+the full detail of that item is displayed in another section of the page.
+
+This article by UX Magazine on 
+[application screen design](http://uxmag.com/articles/rich-internet-application-screen-design)
+lists quite a number of the most common user interface screen layouts.
+Several of these are only possible using when the user interface supports the concept of hierarchy, as EmberJs does;
+with several others not requiring, but made much easier.
+
+Describing everything put together here is a little complex,
+however, this JsBin [demonstrates hierarchical routing in EmberJs](http://jsbin.com/wiyin/4/edit?html,js,output) rather succinctly.
+EmberJs' router is extremely powerful,
+allowing us to describe hierarchical states within the app quite easily.
+The hardest part of it really is just getting used to the naming conventions.
 
 ## Components
 
