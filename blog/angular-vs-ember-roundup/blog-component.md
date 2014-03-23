@@ -38,6 +38,53 @@ are applied in this manner.
 To build components, however,
 we need to use more advanced features of directives.
 
+#### `restrict`, `transclude`, and isolate `scope`
+
+Let us take the most basic use case:
+
+		App.directive('fooComponent', function() {
+			return {
+				templateUrl: 'components/foo.html'
+			};
+		});
+
+In order to use this "component" in a template we would simply use:
+
+		<div foo-component>
+		</div>
+
+All this does is take the template at `components/foo.html`,
+and render it within this `div`.
+This does not look very much like a component,
+and lacks a few features that we would expect of one.
+
+Now let us make it a little more useful by adding into the mix
+`restrict`, `transclude`, and an isolate `scope`:
+
+		App.directive('fooComponent', function() {
+			return {
+				restrict: 'E',
+				transclude: true,
+				scope: {
+					bar: '='
+				},
+				templateUrl: 'components/foo.html'
+			};
+		});
+
+In order to use this component within a temaplate we use:
+
+		<foo-component>
+		</foo-component>
+
+Now that is looking a little more like it should -
+we are no longer "tagging" a `div` with the name of a directive,
+but instead have an element which is the name of the directive.
+This was accomplished using `restrict: 'E'`,
+which tells angular that this directive should be applied to elements,
+instead of attributes, which we saw previously.
+
+
 [creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
 
 [choose your own adventure](https://github.com/danielstern/cyo)
