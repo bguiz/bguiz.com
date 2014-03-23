@@ -19,6 +19,25 @@ tags:
 
 ### AngularJs components
 
+AngularJs does not provide a direct construct for custom components.
+However, through the use of directives,
+it is posible to create your own custom components.
+
+Directives in AngularJs can be used to define the way in which the Javascript application code
+interacts with the DOM.
+We have already seen some of these in action,
+with the `ngModel`, `ngController` and `ngClick` directives.
+The templates know where to apply the Javascript code for these directives,
+where DOM elements contain the dasherised versions of these directives' names
+as attributes `ng-model`, `ng-controller`, and `ng-click`.
+
+However, this is just the very basic way in which we can use directives.
+All the the directives that AngularJs ships with -
+the `ng*` directives -
+are applied in this manner.
+To build components, however,
+we need to use more advanced features of directives.
+
 [creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
 
 [choose your own adventure](https://github.com/danielstern/cyo)
