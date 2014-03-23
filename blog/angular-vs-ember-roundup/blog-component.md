@@ -84,6 +84,37 @@ This was accomplished using `restrict: 'E'`,
 which tells angular that this directive should be applied to elements,
 instead of attributes, which we saw previously.
 
+As a side note, you might be tempted to simply do `<foo-component />`,
+since it does not contain anything.
+Do not do this - AngularJs' templating will not parse this as expected,
+as self-closing or void tags do no get read.
+
+Next, we have `transclude: true`.
+This is what we should do if we want to be able to support
+components which do contain DOM within their tag, for example:
+
+		<foo-component>
+			<p>Some transcluded text</p>
+		</foo-component>
+
+Inside the template *for the component*, we have
+
+		<div>
+			<div ng-transclude></div>
+			<p>Some non-transcluded text</p>
+		</div>
+
+This will render DOM that looks like this:
+
+		<foo-component>
+			<p>Some transcluded text</p>
+			<p>Some non-transcluded text</p>
+		</foo-component>
+
+If our component does not need to support this type of functionality,
+then we can leave out `transclude` from the directive definition,
+and avoid its overhead.
+
 
 [creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
 
