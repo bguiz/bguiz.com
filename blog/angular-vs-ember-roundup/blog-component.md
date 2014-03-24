@@ -174,11 +174,26 @@ This allows us to set up a boundary of sorts,
 which is great for making components,
 because its inputs and outputs, and thus its interface, are clearly defined.
 
-[creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
+This is a rather simple explanation of the concepts of `restrict`, 
+`transclude`, and `scope` isolation,
+which are necessary to make components in AngularJs.
+The follwing resources cover these in greater depth:
 
-[choose your own adventure](https://github.com/danielstern/cyo)
+- [Creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
+- [Understanding Scopes - Directives](https://github.com/angular/angular.js/wiki/Understanding-Scopes#-directives)
+- [Miško Hevery on plans tomake web compnents work seamlessly with AngularJs directives](https://groups.google.com/forum/#!msg/polymer-dev/4RSYaKmbtEk/uYnY3900wpIJ)
 
-[Miško Hevery on plans tomake web compnents work seamlessly with AngularJs directives](https://groups.google.com/forum/#!msg/polymer-dev/4RSYaKmbtEk/uYnY3900wpIJ)
+As mentioned earlier, AngularJs does not provide a means to create web components directly.
+What is does provide you with, however, are some lower level concepts,
+with which web components may be created.
+Combine them together using certain design patterns,
+such as these ones described above, 
+and you have got your own web components.
+
+That being said, all that felxibility means that you can put these concepts together in novel ways,
+and create other things than web components.
+One great example of this is creating your own Domain Specific Language (DSL).
+Take this creative example, where some created a [DSL to describe a choose-your-own adventure story](https://github.com/danielstern/cyo).
 
 [Web components draft spec](http://www.w3.org/TR/components-intro/)
 
