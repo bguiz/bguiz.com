@@ -115,6 +115,64 @@ If our component does not need to support this type of functionality,
 then we can leave out `transclude` from the directive definition,
 and avoid its overhead.
 
+The last concept that we have is scope isolation.
+The default behaviour in an AngularJs template,
+is for the scope present on an element to be available on any of its child elements.
+This is because, normally, a child scope prototypically inherits from its parent scope.
+When you do not want this to happen,
+you apply a directive on a child element,
+and in the definition for the directive,
+you tell it to use a new scope,
+optionally telling it which attributes from the parent scope to copy.
+In AngularJs vocabulary, this is known as scope isolation.
+
+The most basic use of scope isolation looks like this
+
+		App.directive('fooComponent', function() {
+			return {
+				scope: true,
+				templateUrl: 'components/foo.html'
+			};
+		});
+
+The `scope: true` tells AngularJs that this directive uses a brand new scope,
+and does not have access to the `$scope` of its parent.
+Since we have simply used a boolean flag,
+we are simply saying, "this directive wants its scope to not inherits from its parent scope"
+and since it is empty, there will not be anything for the templates to bind to.
+
+		App.directive('fooComponent', function() {
+			return {
+				scope: true,
+				templateUrl: 'components/foo.html'
+			};
+		});
+
+Now we step things up a notch, and create a more useful isolate scope.
+
+		App.directive('fooComponent', function() {
+			return {
+				scope: {
+					foo: '=', //two-way binding
+					bar: '@', //one-way binding
+					baz: '&'  //expression binding
+				},
+				templateUrl: 'components/foo.html'
+			};
+		});
+
+Here we have made three things available on the this directive's `$scope`.
+
+- The `&` binds to an expression named `baz`
+- The `@` binds to a property `bar`
+- The `&` binds to a property `foo`
+
+The parent scope might have many other properties,
+however, if this directive tries to access them,
+it will not be able to find them.
+This allows us to set up a boundary of sorts,
+which is great for making components,
+because its inputs and outputs, and thus its interface, are clearly defined.
 
 [creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
 
