@@ -181,7 +181,6 @@ The follwing resources cover these in greater depth:
 
 - [Creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
 - [Understanding Scopes - Directives](https://github.com/angular/angular.js/wiki/Understanding-Scopes#-directives)
-- [Miško Hevery on plans tomake web compnents work seamlessly with AngularJs directives](https://groups.google.com/forum/#!msg/polymer-dev/4RSYaKmbtEk/uYnY3900wpIJ)
 
 As mentioned earlier, AngularJs does not provide a means to create web components directly.
 What is does provide you with, however, are some lower level concepts,
@@ -190,18 +189,20 @@ Combine them together using certain design patterns,
 such as these ones described above, 
 and you have got your own web components.
 
-That being said, all that felxibility means that you can put these concepts together in novel ways,
+That being said, all that flexibility means that you can put these concepts together in novel ways,
 and create other things than web components.
 One great example of this is creating your own Domain Specific Language (DSL).
 Take this creative example, where some created a [DSL to describe a choose-your-own adventure story](https://github.com/danielstern/cyo).
 
-[Web components draft spec](http://www.w3.org/TR/components-intro/)
+#### The web components spec
 
-- building a DSL using directives
-- no special syntax for components
-- just use directives and isolate their scope
-- syntax of a scope isolated, element restricted directive
-- relation to web components spec
+The [web components specification](http://www.w3.org/TR/components-intro/)
+is curently [in draft status](https://www.w3.org/standards/techs/components#drafts).
+
+Miško Hevery has written about plans to [make web components work seamlessly with AngularJs directives](https://groups.google.com/forum/#!msg/polymer-dev/4RSYaKmbtEk/uYnY3900wpIJ).
+Knowing that AngularJs plans to keep aligned with standards specifications is important,
+because it means that apps developed with the framework will themselves be standards compliant,
+and gain all the benefits inherent in being so.
 
 ### EmberJs components
 
