@@ -206,6 +206,85 @@ and gain all the benefits inherent in being so.
 
 ### EmberJs components
 
+In comparing the various aspects of the two single page application frameworks so far,
+in every point of comparison,
+EmberJs' offering has presented a more complex option than AngularJs' the equivalent.
+With components, however, the opposite is true -
+Ember components are much more straight forward than what we have looked at above in AngularJs.
+
+This is because in Ember components,
+all those three decisions have been made for you.
+An Ember components can be thought of as an
+["element-restricted, isolate-scoped, transcluded directive"](http://docs.google.com/presentation/d/1e0z1pT9JuEh8G5DOtib6XFDHK0GUFtrZrU3IfxJynaA/present?slide=id.g177e4bd2b_0400).
+
+#### Syntax for Ember Components
+
+The minimum required to create a component is to create a template,
+which is named according to the naming convention:
+Prefixed with `components/` ,
+and the name of the component must contain at least one hyphen (`-`).
+
+		{{!-- components/the-foo --}}
+		<div>
+			This is a foo
+		</div>
+
+In order to display the component in a template,
+use a handlebars helper with the same name as the component:
+
+		{{the-foo}}
+
+This is the minimum requirement, however, not very useful.
+We want to be able to do three things, just like we did with the AngularJs directive.
+
+- Use elements - strictly speaking, we do not get this, but we get something similar, with the handlebars helper above (element restricted)
+- Display content from the template within the component (transclusion)
+- Pass in select models or attributes into the component (scope &amp; scope isolation)
+
+This is quite easily achieved:
+
+		{{!-- components/the-foo --}}
+		<div>
+			Foo bar is: {{foo.bar}}
+			{{yield}}
+		</div>
+
+&hellip; and we use the component in the template like this:
+
+		{{#the-foo foo=model}}
+			<p>This paragraph will be displayed where {{yield}} is<p>
+		{{/the-foo}}
+		
+Extremely straightforward.
+
+One last thing, is that in AngularJs components, 
+you already have a directive,
+and if you wish to add additional properties and actions,
+you simply stick them in the scope..
+
+In EmberJs components, we can get transclusion and scope isolation,
+without writing any Javascript.
+However, when we wish to add properties and actions,
+we will need to to this define a component.
+
+Create an object that extends `Ember.View` as a propety on the `App` object,
+and it must be named the same as the template,
+except capitalised, un-dasherised, and suffixed with `Component`.
+
+		App.TheFooComponent = Ember.View.extend({
+			exclaimBar: function() {
+				return this.get('foo.bar')+'!!!';
+			}.property('foo.bar')
+		});
+
+&hellip; and modify the component to use the custom property:
+
+		{{!-- components/the-foo --}}
+		<div>
+			Foo bar is: {{exclaimBar}}
+			{{yield}}
+		</div>
+
 [Using EmberJs components](http://emberjs.com/guides/components/passing-properties-to-a-component/)
 
 [Yehuda Katz on plans for Web Components in EmberJs](https://gist.github.com/wycats/9144666b0c606d1838be)
