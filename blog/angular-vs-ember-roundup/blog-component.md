@@ -297,9 +297,43 @@ Reading this,it is evident that Ember has a concrete plan for
 
 ## Discussion
 
-- Link to MVC
-- MVC + templates + routing + components cover all the fundamental or "compulsory parts"/ "core competency" of a SPA framework
-	- Thus these are the most important
-- The remainder of the posts compare these frameworks or higher order differentiating factors
-	- These are important too
-	- But basics come first - hierarchy of needs
+Previously, we have discussed models, views, and controllers,
+in the context of the MVC pattern.
+Where do components fit into this?
+Components actually fit into this paradigm quite nicely - 
+a component, in essence, is grouping together a combination of
+models, views/ templates, and controllers,
+into smaller, resuable units.
+Each of these units is a component,
+and thus components allow us to package repeatable MVC logic in an easy way.
+
+Models, views, controllers, templates, routing, and components
+are all of the basic building blocks used to develop a single page application.
+How the framework of your choice, be it AngularJs or EmberJs,
+provides the functionality for these core comptencies;
+whether its syntax makes sense to you;
+and the future plans for them
+(especially w.r.t. to conforming to W3C specifications or draft specifications);
+are the main things to consider in making the choice in which framework
+you begin developing your app in.
+
+These are the basics - the foundations -
+and thus the concepts that you will come into contact with the most frequently.
+In my humble opinion, thus, these are the most important things to consider when making this choice.
+There are however, quite a few other things that should be considered
+when making this decision.
+These are less about the basic building blocks -
+higher order differentiating factors.
+While these are important too, remeber that basics come first.
+If you form a string preference based upon the basics alone,
+then go with it.
+Chances are, the more abstract concepts are not going to sway you
+very much after all.
+
+On the other hand, if you still feel like it could go either way,
+it will be worth looking into them.
+These concepts include testability, search engine optimisation, 
+developer productivity, level of abstraction, level of opinionation,
+digest cycle/ run loop, community.
+Hit me up in the comments or on twitter if you would like me to continue this series,
+and write about them.
