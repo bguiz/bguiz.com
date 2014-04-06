@@ -285,17 +285,15 @@ except capitalised, un-dasherised, and suffixed with `Component`.
 			{{yield}}
 		</div>
 
-[Using EmberJs components](http://emberjs.com/guides/components/passing-properties-to-a-component/)
+The [API documentation for Ember component](http://emberjs.com/api/classes/Ember.Component.html) explains this quite well.
 
-[Yehuda Katz on plans for Web Components in EmberJs](https://gist.github.com/wycats/9144666b0c606d1838be)
+#### Ember Components and and the Web Components Spec
 
-- syntax of Ember.Component
-- learning curve
-- relation to web components spec
-
-- What is the syntax used to express a component?
-- What level of abstraction do these components sit at?
-- How well do these components align with the current draft sepcification for web components?
+Yehuda Katz, [describes plans for Web Components in EmberJs](https://gist.github.com/wycats/9144666b0c606d1838be).
+He goes into details about how it realtes to the spec,
+including how binding and lifecycles will work.
+Reading this,it is evident that Ember has a concrete plan for
+"how Ember could adopt semantics similar to web components."
 
 ## Discussion
 
