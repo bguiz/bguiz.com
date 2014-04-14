@@ -251,6 +251,10 @@ and thus it authors may choose to switch to using POJSOs instead.
 That being said, it is pertinent to remember that this is presently a proposal, and we do not know if or when this will happen,
 and more importantly, what the actual implementation and variation in adoption amongst the major browsers will be.
 
-## Continued
+## Discussion
 
-This post has gottent a little too long, so I'll split it. In part two, we will continue  with views, controllers and templates.
+We have seen how models in AngularJs are far more easy to use than those of EmberJs.
+The fact that ember data is still in beta, and that they require wrapper objects, makes EmberJs models more diffuclt to work with.
+However, AngularJs' use of POJSOs does have some drawbacks,
+that they cause problems and actually become *more complex* to work with than EmberJs models,
+due to the need to perform dirty checking in each digest cycle.

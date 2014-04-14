@@ -153,20 +153,6 @@ Unfortunately, [it is still in the works](http://discuss.emberjs.com/t/when-will
 
 ## Discussion
 
-We have now covered the topic of models, views, and controllers,
-and have described how they work in both AngularJs and EmberJs,
-along with templates, where both frameworks defer most of their view logic to.
-
-*Models*
-
-We have seen how models in AngularJs are far more easy to use than those of EmberJs.
-The fact that ember data is still in beta, and that they require wrapper objects, makes EmberJs models more diffuclt to work with.
-However, AngularJs' use of POJSOs does have some drawbacks,
-that they cause problems and actually become *more complex* to work with than EmberJs models,
-due to the need to perform dirty checking in each digest cycle.
-
-*Views & Templates*
-
 In both frameworks, we do not typically need to spend much time on views.
 We do however, need to deal with templates quite a lot.
 
@@ -181,35 +167,3 @@ The more limited syntax of handlebars syntax can be beneficial,
 as they do not require the designers to understand the Javascript code.
 That being said, if proper care is taken,
 developers can esnure that AngularJs templates use only simple syntax.
-
-*Controllers*
-
-AngularJs provides an extremely elegant solution of defining modules and linking them to each other,
-through its dependency injection framework.
-The closest that EmberJs comes to this is its naming strategy.
-Models, views, controllers, and templates find each other using this naming strategy,
-in a manner that is not easy to change by developers.
-
-Both AngularJs and EmberJs support two-way binding out of the box between models and views.
-No special logic has to be defined within controller in order to make this happen.
-The limitations of EmberJs's string based templating flow on to two-way binding,
-and impact it too.
-
-AngularJs controllers do not provide a nice means to define dependencies
-between their properties.
-This is perfectly fine for simple properties as we can use a function in its place.
-However, when complex properties are involved,
-this is not ideal, as it will get recomputed in every digest cycle.
-EmberJs provides a much more elegant solution in this area,
-by providing a means to define computed properties.
-
-*Summary*
-
-In summary, both AngularJs and EmberJs are single-page application frameworks that have great support for the MVC pattern,
-and provide an excellent infrastructure to build these apps with.
-
-In various aspects, there are some pros and cons,
-however, these are not deal breakers.
-Many of them boil down to a matter of personal taste
-in deciding which characteristics are a must,
-and which ones are forgo-able.
