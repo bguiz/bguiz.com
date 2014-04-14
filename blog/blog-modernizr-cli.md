@@ -12,6 +12,8 @@ tags:
 
 Modernizr is an an excellent library used for client-side feature detection.
 
+![Modernizr](http://modernizr.com/i/img/logo-x12.png)
+
 The full set of features detected can be obtained using its [development version](http://modernizr.com/downloads/modernizr-latest.js),
 however, including this entire file is not ideal in production -
 why make users download all the extra code for feature detection tests that will not ever be used?
@@ -21,6 +23,9 @@ which lets you fill in a form to select which tests you want,
 and then it generates a customised file for you to download.
 
 ## How about a CLI?
+
+![Modernizr](http://modernizr.com/i/img/logo-x12.png "Modernizr") +
+![Command Line](http://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Blank-extended-keyboard.svg/300px-Blank-extended-keyboard.svg.png "Command Line") = ?
 
 That is great, however, what if you want to use Modernizr to generate
 custom files on the command line?
