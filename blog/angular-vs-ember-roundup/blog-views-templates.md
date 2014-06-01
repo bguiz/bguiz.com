@@ -92,8 +92,8 @@ Syntax:
 		<input {{bind-attr value='model.foo'}}>
 		<button {{action 'changeText'}}>{{model.buttonText}}</button>
 
-Ember uses a templating langvuage called Handlebars.
-It's approach is fundamentally different form that of Angular's,
+Ember uses a templating language called Handlebars.
+Its approach is fundamentally different form that of Angular's,
 as it uses string-based templating.
 This means that it parses the entire template before-hand,
 and generates a function as an output.

@@ -142,7 +142,8 @@ It also provides the means to define relationships between models of one class a
 			bars: [1001, 1002, 1003] //IDs of the bars
 		});
 
-Ember data then allows you to sync the state of these models via a RESTful interface that conforms to a format specified by them.
+Ember data then allows you to sync the state of these models via a RESTful interface
+that conforms to a format specified by them.
 Hint: It is the same as the Ruby on Rails API format.
 
 All batteries included, so it is all peaches, right?

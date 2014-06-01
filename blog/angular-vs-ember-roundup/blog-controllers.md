@@ -87,8 +87,6 @@ The `{{someProperty}}` is slightly more complex,
 because there is a bit of magic going on behind the scenes -
 two-way binding magic!
 
-#### AngularJs two-way binding
-
 When the user clicks on the `<button>`, the value of `someProperty` gets changed by the controller.
 Angular, having parsed the template prior,
 knows that there are two parts of the DOM controlled by `FooCtrl` that are bound to this property;
@@ -135,7 +133,7 @@ As a footnote, it is worth pointing out that instead of having a property on a s
 we could just have a function on the scope that gets called and simply returns the computed value.
 This, however, is not ideal for anything more than the simplest of computed properties,
 because it will be called upon every digest cycle,
-not just each time it needs tobe re-computed.
+not just each time it needs to be re-computed.
 
 ### EmberJs controllers
 
@@ -158,7 +156,7 @@ there is a clean separation between properties and actions, with all actions gro
 
 It is worth noting here that EmberJs controllers distinguish between properties on the controllers,
 and models used by the same controllers.
-Models are created and passed into a controllers using `Ember.Route` objects,
+Models are created and passed into a controllersusing `Ember.Route` objects,
 which we will cover when we cover routing in EmberJs.
 This is because there is only one instance of any controller instantiated,
 and thus its state does *not* get reset each time.
@@ -177,9 +175,9 @@ In EmberJs, however, we must name our controllers (and most other objects actual
 This is a common gotcha, and sometimes you will be left scratching your head
 as to why your code does not appear to have any effect.
 To be fair, you can override this behaviour and specify your own naming strategy,
-but most EmberJs app develpers will simply just conform to the prescribed naming conventions.
+but most EmberJs app developers will simply just conform to the prescribed naming conventions.
 
-## EmberJs two-way binding
+## <EM></EM>berJs two-way binding
 
         <div>
             <button {{action 'someAction'}}>Exclaim harder!</button>
@@ -187,7 +185,7 @@ but most EmberJs app develpers will simply just conform to the prescribed naming
             {{input type="text" value=someProperty}}
         </div>
 
-Two-way binding in EmberJs works in a very similar fashion to the way it works in EmberJs,
+Two-way binding in EmberJs works in a very similar fashion to the way it works in AngularJs,
 so we will only cover the differences.
 
 Two-way bindings in markup work as expected, e.g. `{{someProperty}}`.
@@ -230,7 +228,7 @@ only perform the recomputation only when a property changes.
 This is possible because EmberJs supports the concept of computed properties,
 that is what the syntax of calling `.property()` on the function does -
 the function is now marked as a property,
-and thus can be referred to as a property int he template,
+and thus can be referred to as a property in the template,
 which is a great example of [the uniform access principle](http://en.wikipedia.org/wiki/Uniform_access_principle).
 If this call to property `.property()` contains any arguments,
 EmberJs knows that that property should be recomputed whenever those other properties are changed,
