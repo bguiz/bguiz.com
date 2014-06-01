@@ -27,11 +27,11 @@ When you navigate to a new page, you expected the URL to change.
 Why is routing important, and why does it continue to be needed in single page apps?
 
 - It is what we are used to - when the app goes to a different "page" we expect the URL to change
-- Browser history - we expect to be able to use back and forwardbuttons in order tobe able to navigate within the app
+- Browser history - we expect to be able to use back and forward buttons in order to be able to navigate within the app
 - URL sharing - we have an expectation that copy-pasting the URL and sharing it with someone else will bring them to a similar state within the app. This is known as deep linking.
 - Deep link within packaged apps - single page web apps can be packaged using tools like PhoneGap into native apps. Deep linking within these apps is also possible, if they use routing too.
 
-Let us take a look at how routing is implmented in AngularJs and EmberJs.
+Let us take a look at how routing is implemented in AngularJs and EmberJs.
 
 ### AngularsJs Routing
 
@@ -58,7 +58,7 @@ This module merely needs to be configured by the developer.
 At the bottom, we provide a "catch-all" or default route that will redirect to one of the known routes.
 We provide a mapping between URLs and states that correspond to them.
 Here each state is defined as a controller and a template.
-Note that the state is actually represented by a model, a view, and a controller - 
+Note that the state is actually represented by a model, a view, and a controller -
 essentially an MVC state -
 in the router we name the controller,
 and the template (which is effectively the view),
@@ -68,7 +68,8 @@ and we know that the controller contains logic that will obtain the model.
 
 In single-page apps, the URL is technically always the same.
 That is because, we are *technically* staying on the same page,
-and merely *pretending* to navigate between different pages by using lots of Javascript.
+and merely *pretend* navigating between different "pages"
+by using Javascript to swap the content of large parts of the page's DOM.
 
 However, this would mean that we would lose all the benefits of our app being URL-driven,
 and thus we need a way to overcome this.
@@ -79,7 +80,7 @@ and another which will only work with browsers that support HTML5
 The **first method** is using hash fragments.
 
 These have been around since the early days of the internet,
-where you would have links that did not link to a different page, 
+where you would have links that did not link to a different page,
 but rather a different position on the page.
 When you clicked on them, your browser would merely scroll to a different position on the page.
 The other thing you would observeis that the URL would get suffixed with '`#`', followed by the name of that link.
@@ -88,7 +89,7 @@ and thus it was possible to use the back and forward buttons to jump between the
 
 Try it out for yourself!
 Go to any article on [Wikipedia](http://en.wikipedia.org) and find citations in line with the text.
-Many of these are hyperlink that will jump you down to the bottom of the page.
+Many of these are hyperlinks that will jump you down to the bottom of the page.
 Click on a few of these in a row, and then use the back and forward buttons.
 Neat right?
 
@@ -105,7 +106,7 @@ The **second method** is to use the history API.
 The history API is a far more recent thing,
 as it is part of the HTML5 specification.
 Only newer browsers support this specification,
-unlike hash fragments, which understood by pretty much every browser today.
+unlike hash fragments, which understood by all browsers.
 
 It is not very much different from the hash fragment means of storing the application state in the URL.
 All it really does, is provide a way to tell the server that this particular URL path is served by an app that is history API enabled,
@@ -117,10 +118,10 @@ via the history API, and uses that just as it would the hash fragment URLs descr
 How is the end result different?
 Well, the obvious difference is that the end user does not see the hash fragment -
 the URLs that change when navigating between different states within a single-page app.
-This single-page app may as well be a traditional web site, 
+This single-page app may as well be a traditional web site,
 the end user will not perceive the difference.
-There are a few other minor difference as well
-(which we will not go into).
+(Do note that there are a few other minor differences as well,
+which we will not go into).
 
 *The 'finite' in finite state machine*
 
@@ -183,7 +184,7 @@ To understand how routing works in EmberJs,
 it is necessary to first understand EmberJs' philosophy on convention over configuration -
 in particular, its naming conventions.
 
-When you instantiate a new app using 
+When you instantiate a new app using
 `var App = Ember.Application.create({})`,
 the framework will create a `Router` object, `App.Router`.
 This is the first of many naming conventions.
@@ -197,7 +198,7 @@ Both functions take in a string as the first parameter
 That string is,by default, a section of the URL.
 
 That string is also what EmberJs will use as the input for other objects that represent the state.
-The naming conventions are described in detail in the 
+The naming conventions are described in detail in the
 [EmberJs guides](http://emberjs.com/guides/concepts/naming-conventions/).
 
 - URL: `/`
@@ -213,10 +214,11 @@ The naming conventions are described in detail in the
 	- Controller: `FooIndexController`
 	- Template: `foo/index`
 
-This is actually a little hard to grok, and this 
+This is actually a little hard to grok, and this
 [EmberJs routes guide](http://emberjs.com/guides/routing/defining-your-routes/)
-is a detailed, but excellent reference, essential in determining what you should name your `Route`s, `Controller`s and templates.
-If your name them any differently from what EmberJs expects them to be named,
+is a detailed, but excellent reference,
+essential in determining what you should name your `Route`s, `Controller`s and templates.
+If you name them any differently from what EmberJs expects them to be named,
 they simply are not found, and defaults are used instead.
 This is quite difficult at first, as it is quite easy to get these names wrong.
 
@@ -238,13 +240,13 @@ the model is expetced to be an `Object`.
 However, it is most likely that your app does not want to use hard coded models like so.
 Most likely, you will want to dynamically load data from a server,
 using AJAX.
-There are libraries which cover this quite well, 
+There are libraries which cover this quite well,
 such as Ember Data and Ember Model.
 However, it is possible to use AJAX directly without wrapping the objects in a model object.
 
 		App.FoosRoute = Ember.Route.extend({
 			model: function() {
-				var req = Ember.RSVP.resolve(jQuery.getJSON('/will/404'));
+				var req = Ember.RSVP.resolve(jQuery.getJSON('/api/foos'));
 				return req.then(function resolve(response) {
 					return response.foos;
 				});
@@ -290,7 +292,7 @@ Their limitations led to the development of a concept called promises,
 which are clever wrappers around callbacks which provide a very nice interface to work with asynchronous code -
 much nicer than callbacks.
 
-If you would like to know more about the frustrations of using callbacks - 
+If you would like to know more about the frustrations of using callbacks -
 and in using promises too - check out my [presentation on qryq](http://bguiz.github.io/qryq),
 a NodeJs library I wrote to help with [managing promises with dependencies between them](http://github.com/bguiz/qryq).
 
@@ -311,12 +313,12 @@ in EmberJs, be prepared to rewrite them using promises.
 
 #### Hierarchical Routes
 
-AngularJs routing uses a finite state machine under the hoode.
-EmberJs routing, on the other hand, uses ahierarchical stae machine under the hood.
+AngularJs routing uses a finite state machine under the hood.
+EmberJs routing, on the other hand, uses ahierarchical state machine under the hood.
 The difference between these two is evident when inspecting the routers.
-In AngularJs' router syntax, using `$routeProvider`, 
+In AngularJs' router syntax, using `$routeProvider`,
 we see that all states are define at the same level.
-In EmberJs' router syntax, using `Ember.Router.map`, 
+In EmberJs' router syntax, using `Ember.Router.map`,
 we see that states might define other states "nested" within them.
 This is where the hierarchy comes into play.
 
@@ -349,9 +351,9 @@ is not quite as assembling the composite URL for that state,
 but it is quite a powerful tool to have when building a web app.
 
 EmberJs simply keeps all the current `Route`s, models, `View`s, and `Controller`s
-defined by each of the active states active at the saem time to accomplish this.
+defined by each of the active states active at the same time to accomplish this.
 Templates are slightly more complex.
-In summary, for multiple templatesto be active in a hierarchy, 
+In summary, for multiple templates to be active in a hierarchy,
 each one must be defined within the others.
 This is accomplished using the Handlebars helper, `{{outlet}}`.
 That simply tells the current template that,
@@ -365,7 +367,7 @@ in one section of the page,
 and when each of these is clicked on,
 the full detail of that item is displayed in another section of the page.
 
-This article by UX Magazine on 
+This article by UX Magazine on
 [application screen design](http://uxmag.com/articles/rich-internet-application-screen-design)
 lists quite a number of the most common user interface screen layouts.
 Several of these are only possible using when the user interface supports the concept of hierarchy, as EmberJs does;

@@ -1,6 +1,6 @@
 ---
-title: Models, Views, Controllers, and Templates in AngularJs and EmberJs
-slug: angularjs-vs-emberjs-mvc-template-part-2
+title: Controllers in AngularJs and EmberJs
+slug: angularjs-vs-emberjs-mvc-controllers
 author: bguiz
 date: 2014-03-09
 template: article.jade
@@ -10,6 +10,7 @@ tags:
 - single-page-apps
 - comparison
 - MVC
+- controllers
 ---
 
 ## MVC + Templates
@@ -21,133 +22,6 @@ Models, views, and controllers are one of the key components of a single-page ap
 We discussed the MVC pattern, the history of single-page apps,
 and also compared Angular models and Ember models in detail, in the previous post.
 This post continues from that with a comparison of views, controllers and templates in Angular and Ember.
-
-## Views
-
-Views are classes which control the behaviour of the presentation aspects of one or more models.
-Both Angular templates, and Handlebars templates (Ember),
-are so powerful that views do not do much.
-
-In fact most developers can develop an entire app without declaring or modifying any views,
-and only use templates instead.
-They are only *really* needed when there is a need to handle complex user events.
-
-However, for the sake of completeness,
-we shall just take a brief look at the syntax for views in each framework.
-
-### AngularJs views
-
-You never see the Javascript for the views.
-Instead, you invoke the `ngView ` directive in the template.
-That is all there is to it.
-
-### EmberJs views
-
-		var myFooView = Ember.View.create({
-			templateName: 'foo-view'
-		});
-		//do things with the view
-
-Usually, however, you can define user interaction in controllers,
-and that is more common than using views.
-
-A pretty brief section here;
-we will be taking a look at where the majority of the presentation logic occurs -
-in templates - later.
-
-## Templates
-
-As mentioned earlier, templates are where most of the presentation logic occurs.
-AngularJs and EmberJs have taken very different approaches for their templates,
-but they both accomplish a fairly similar task.
-
-** AngularJs templates **
-
-Syntax:
-
-		<body ng-controller="FooController">
-			<input ng-model="foo" value="bar">
-			<button ng-click="changeFoo()">{{buttonText}}</button>
-		</body>
-
-Angular has no templating language per se - it simply inspects the rendered DOM,
-which has been decorated with certain attributes that are bound to various angular modules.
-This is done in one of two ways:
-
-- Directives
-	- Elements or attributes that link to modules known to the agnular app
-	- Angular comes with several built in directives, and you can recognise them as `ng-*` attributes in the DOM
-- Markup
-	- Any part of the markup, where text appears between doubly curly braces `{{like this}}`
-	- Angular evaluates the expression within the braces, and substitutes for the output value
-
-Angular allows an extremely expressive syntax to be added to the templates,
-including Javascript expressions, and filters using a UNIX-style pipe (`|`) syntax.
-
-** EmberJs templates **
-Syntax:
-
-		<input {{bind-attr value='model.foo'}}>
-		<button {{action 'changeText'}}>{{model.buttonText}}</button>
-
-Ember uses a templating langvuage called Handlebars.
-It's approach is fundamentally different form that of Angular's,
-as it uses string-based templating.
-This means that it parses the entire template before-hand,
-and generates a function as an output.
-That function is then subsequently used to generate the DOM.
-
-This approach has pros and cons.
-
-- Pros
-	- Since templates are pre-compiled they render quickly
-- Cons
-	- Requires an extra compilation step
-	- As quick as precompiled templates are, they cannot be faster than DOM that is already there
-	- For two way bindings to work, extra nodes need to be inserted into the DOM (metamorph tags)
-
-All of these, in my opinion, are pretty minor, except for the one about two-way bindings.
-Littering the DOM with numerous `<script>` metamorph tags really makes the DOM ugly to inspect,
-and makes one wonder, surely, there must be a better way to do this!
-The other implication of this is that two way binding of attributes on DOM nodes
-is simply not possible using the same syntax,
-and a special alternate syntax (`{{bind-attr}}`) is required to accomplish this.
-All this makes it feel more like something tacked together, rather than an elegant solution.
-
-The syntax allowed within the templates is very restrictive as well.
-We can only output properties verbatim.
-If any processing or formatting is required,
-the way to do this is to do it in the controller, and create a Handlebars helper, respectively.
-
-### Front-end designers
-
-Eventually, the front-end Javascript developer will need to let the front-end
-design/ UI/ UX developer modify the templates.
-Most times, these are not the same people,
-and possess different skill sets.
-Templates, however, is where some overlap occurs.
-
-How easily understood are Angular and Ember templates,
-by someone who is not familiar with the Javascript for that web app?
-
-In both cases, it turns out, to be pretty easy,
-as they are straight forward, and intuitive to understand.
-
-However Angular developers may need to be cautious about how complex the expressions
-that they put into the templates are.
-In Handlebars, this is not a concern, because developers are forced to extract
-all logic into Handlebars helpers.
-
-### Additional libraries
-
-AngularJs has got some solid templating going for it,
-and EmberJs' offering has a few large drawbacks.
-Thankfully there is a new library, [HTMLbars](https://github.com/tildeio/htmlbars), that tackles these problems.
-It is DOM-aware, has expressions and piping, and renders a clutter-free DOM.
-[Example by wycats][8]
-[Slides by ebryn][9]
-
-Unfortunately, [it is still in the works](http://discuss.emberjs.com/t/when-will-htmlbars-be-ready/3155/20).
 
 ## Controllers
 
@@ -164,8 +38,8 @@ and controllers are necessary to define more complex interactions between the mo
 
 ### AngularJs controllers
 
-Controllers in Angular are not exactly controllers. 
-In fact Angular does not call itself an MVC framework, 
+Controllers in Angular are not exactly controllers.
+In fact Angular does not call itself an MVC framework,
 [it calls itself an MVW (model-view-whatever) framework](http://plus.google.com/+AngularJS/posts/aZNVhj355G2) instead.
 (I would argue that the `$scope` object in any angular controller module is the actual controller)
 That being said, while they are not controllers from an academic point of view,
@@ -173,14 +47,14 @@ from a practical point of view, they most certainly are.
 
 The syntax of defining a controller in an AngularJs app is like this:
 
-		angular.module('app', []).controller('FooCtrl', function($scope) {
-			$scope.someProperty = 'some initial value';
-			$scope.someAction = function() {
-				$scope.someProperty += '!';
-			};
-		});
+        angular.module('app', []).controller('FooCtrl', function($scope) {
+            $scope.someProperty = 'some initial value';
+            $scope.someAction = function() {
+                $scope.someProperty += '!';
+            };
+        });
 
-The `$scope` object is prototypically inherited from the `$scope` object of the parent object, 
+The `$scope` object is prototypically inherited from the `$scope` object of the parent object,
 which in this case is the main app.
 It is made available to this controller through AngularJs' dependency injection framework.
 This in itself is a fascinating topic that warrants a discussion of its own,
@@ -192,20 +66,20 @@ Unfortunately, a discussion on this is not one of the criteria which we are comp
 
 As mentioned earlier, two-way binding comes out of the box with AngularJs.
 
-		<div ng-controller="FooCtrl">
-			<button ng-click="someAction()">Exclaim harder!</button>
-			<p>Some property is {{someProperty}}</p>
-			<input type="text" value="{{someProperty}}">
-		</div>
+        <div ng-controller="FooCtrl">
+            <button ng-click="someAction()">Exclaim harder!</button>
+            <p>Some property is {{someProperty}}</p>
+            <input type="text" value="{{someProperty}}">
+        </div>
 
-In the above template, when AngularJs parses the DOM, 
-the `ng-controller` attribute is detected to have a name matching with the `ngController`directive, 
+In the above template, when AngularJs parses the DOM,
+the `ng-controller` attribute is detected to have a name matching with the `ngController`directive,
 which then knows to find the controller we have defined above.
 
 The `ng-click` directive, as well as the `{{someProperty}}` bound directive,
 are both within this "controlled" `<div>` and thus AngularJs know to look for `someAction` and `someAction` on the `$scope` belonging to the `FooCtrl` directive.
 
-The `ng-click` is fairly self-explanatory - 
+The `ng-click` is fairly self-explanatory -
 this directive evaluates the expression within the attribute value when the element is clicked.
 In this case, `$scope.someAction` gets invoked.
 
@@ -213,10 +87,8 @@ The `{{someProperty}}` is slightly more complex,
 because there is a bit of magic going on behind the scenes -
 two-way binding magic!
 
-#### AngularJs two-way binding
-
 When the user clicks on the `<button>`, the value of `someProperty` gets changed by the controller.
-Angular, having parsed the template prior, 
+Angular, having parsed the template prior,
 knows that there are two parts of the DOM controlled by `FooCtrl` that are bound to this property;
 so it goes and updates them, and the view gets updated due to a change detected in the model.
 Now the user does something else - type into the text `<input>`.
@@ -257,11 +129,11 @@ and provide it with a callback function that would then update the output proper
 In this situation, you do not declare the relationship between one property and another,
 instead you are imperatively describing the computation.
 
-As a footnote, it is worth pointing out that instead of having a property on a scope, 
+As a footnote, it is worth pointing out that instead of having a property on a scope,
 we could just have a function on the scope that gets called and simply returns the computed value.
 This, however, is not ideal for anything more than the simplest of computed properties,
 because it will be called upon every digest cycle,
-not just each time it needs tobe re-computed.
+not just each time it needs to be re-computed.
 
 ### EmberJs controllers
 
@@ -269,22 +141,22 @@ EmberJs supports controllers that conform to the MVC pattern.
 
 The syntax of defining a controller in an EmberJs app is like this:
 
-		App.FooController = Ember.Controller.extend({
-			someProperty: 'some initial value',
+        App.FooController = Ember.Controller.extend({
+            someProperty: 'some initial value',
 
-			actions: {
-				someAction: function() {
-					this.set('someProperty', this.get('someProperty') + '!');
-				}
-			}
-		});
+            actions: {
+                someAction: function() {
+                    this.set('someProperty', this.get('someProperty') + '!');
+                }
+            }
+        });
 
-As we can see in the code above, 
+As we can see in the code above,
 there is a clean separation between properties and actions, with all actions grouped within the `actions` object in the controller.
 
 It is worth noting here that EmberJs controllers distinguish between properties on the controllers,
 and models used by the same controllers.
-Models are created and passed into a controllers using `Ember.Route` objects,
+Models are created and passed into a controllersusing `Ember.Route` objects,
 which we will cover when we cover routing in EmberJs.
 This is because there is only one instance of any controller instantiated,
 and thus its state does *not* get reset each time.
@@ -297,23 +169,23 @@ depending on whether the model is a single object or a collection of objects,
 and these types of controllers proxy the properties of their models.
 
 Another thing worth noting is that we had to name this controller `"FooController"`.
-In AngularJs, we were free to name our controller anything we wanted - 
+In AngularJs, we were free to name our controller anything we wanted -
 `"FooBarCtrl"` would have worked just as well as `"FooCtrl"`.
 In EmberJs, however, we must name our controllers (and most other objects actually), according to their naming convention.
 This is a common gotcha, and sometimes you will be left scratching your head
 as to why your code does not appear to have any effect.
 To be fair, you can override this behaviour and specify your own naming strategy,
-but most EmberJs app develpers will simply just conform to the prescribed naming conventions.
+but most EmberJs app developers will simply just conform to the prescribed naming conventions.
 
-## EmberJs two-way binding
+## <EM></EM>berJs two-way binding
 
-		<div>
-			<button {{action 'someAction'}}>Exclaim harder!</button>
-			<p>Some property is {{someProperty}}</p>
-			{{input type="text" value=someProperty}}
-		</div>
+        <div>
+            <button {{action 'someAction'}}>Exclaim harder!</button>
+            <p>Some property is {{someProperty}}</p>
+            {{input type="text" value=someProperty}}
+        </div>
 
-Two-way binding in EmberJs works in a very similar fashion to the way it works in EmberJs,
+Two-way binding in EmberJs works in a very similar fashion to the way it works in AngularJs,
 so we will only cover the differences.
 
 Two-way bindings in markup work as expected, e.g. `{{someProperty}}`.
@@ -325,7 +197,7 @@ It gets more complicated when there is no bilt in helper or view.
 In this case you will need to use `{{bind-attr}}`.
 We have covered some of this in the section about EmberJs templates.
 
-The implications of this is that binding is much more complex in EmberJs than it is in AngularJs, 
+The implications of this is that binding is much more complex in EmberJs than it is in AngularJs,
 simply because there is more syntax to learn.
 
 #### EmberJs controllers: Imperative vs declarative
@@ -334,20 +206,20 @@ Two-way bound properties in EmberJs are declarative, just as they are in Angular
 
 Properties in EmberJs are declarative too:
 
-		App.FoosController = Ember.ArrayController.extend({
-			filterText: '',
+        App.FoosController = Ember.ArrayController.extend({
+            filterText: '',
 
-			filteredModel: function() {
-				var foos = this.get('model'), filterText = this.get('filterText');
-				//compute a filtered version of the foos array, and return it
-			}.property('filterText'),
+            filteredModel: function() {
+                var foos = this.get('model'), filterText = this.get('filterText');
+                //compute a filtered version of the foos array, and return it
+            }.property('filterText'),
 
-			actions: {
-				someAction: function() {
-					this.set('someProperty', this.get('someProperty') + '!');
-				}
-			}
-		});
+            actions: {
+                someAction: function() {
+                    this.set('someProperty', this.get('someProperty') + '!');
+                }
+            }
+        });
 
 Here we define a property that is dependant on another property,
 with a fairly complex computation (filtering an array's contents).
@@ -355,49 +227,18 @@ This is possible to do because we know that we know that EmberJs will
 only perform the recomputation only when a property changes.
 This is possible because EmberJs supports the concept of computed properties,
 that is what the syntax of calling `.property()` on the function does -
-the function is now marked as a property, 
-and thus can be referred to as a property int he template,
+the function is now marked as a property,
+and thus can be referred to as a property in the template,
 which is a great example of [the uniform access principle](http://en.wikipedia.org/wiki/Uniform_access_principle).
 If this call to property `.property()` contains any arguments,
 EmberJs knows that that property should be recomputed whenever those other properties are changed,
 and thus is a computed property.
 
-This way of defining computed properties is a lot more succinct, 
+This way of defining computed properties is a lot more succinct,
 than using `$watch` on AngularJs controller scope;
 and is much more elegant, and easier to understand.
 
 ## Discussion
-
-We have now covered the topic of models, views, and controllers,
-and have described how they work in both AngularJs and EmberJs,
-along with templates, where both frameworks defer most of their view logic to.
-
-*Models*
-
-We have seen how models in AngularJs are far more easy to use than those of EmberJs.
-The fact that ember data is still in beta, and that they require wrapper objects, makes EmberJs models more diffuclt to work with.
-However, AngularJs' use of POJSOs does have some drawbacks,
-that they cause problems and actually become *more complex* to work with than EmberJs models,
-due to the need to perform dirty checking in each digest cycle.
-
-*Views & Templates*
-
-In both frameworks, we do not typically need to spend much time on views.
-We do however, need to deal with templates quite a lot.
-
-AngularJs uses DOM based templating. 
-This makes it extremely flexible.
-EmberJs, on the other hand, uses string based templating.
-This limits it in a number of ways - 
-the rendered DOM looks rather ugly,
-and binding to attributes is rather difficult.
-
-The more limited syntax of handlebars syntax can be beneficial,
-as they do not require the designers to understand the Javascript code.
-That being said, if proper care is taken,
-developers can esnure that AngularJs templates use only simple syntax.
-
-*Controllers*
 
 AngularJs provides an extremely elegant solution of defining modules and linking them to each other,
 through its dependency injection framework.
@@ -418,12 +259,16 @@ this is not ideal, as it will get recomputed in every digest cycle.
 EmberJs provides a much more elegant solution in this area,
 by providing a means to define computed properties.
 
-*Summary*
+## MVC
+
+We have now covered the topic of models, views (including templates), and controllers,
+and have described how they work in both AngularJs and EmberJs,
+along with templates, where both frameworks defer most of their view logic to.
 
 In summary, both AngularJs and EmberJs are single-page application frameworks that have great support for the MVC pattern,
 and provide an excellent infrastructure to build these apps with.
 
-In various aspects, there are some pros and cons, 
+In various aspects, there are some pros and cons,
 however, these are not deal breakers.
 Many of them boil down to a matter of personal taste
 in deciding which characteristics are a must,

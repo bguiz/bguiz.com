@@ -138,7 +138,7 @@ The most basic use of scope isolation looks like this
 The `scope: true` tells AngularJs that this directive uses a brand new scope,
 and does not have access to the `$scope` of its parent.
 Since we have simply used a boolean flag,
-we are simply saying, "this directive wants its scope to not inherits from its parent scope"
+we are simply saying, "this directive wants its scope to *not* inherit from its parent scope"
 and since it is empty, there will not be anything for the templates to bind to.
 
 		App.directive('fooComponent', function() {
@@ -163,9 +163,9 @@ Now we step things up a notch, and create a more useful isolate scope.
 
 Here we have made three things available on the this directive's `$scope`.
 
+- The `=` does two-way binding
+- The `@` does one-way binding
 - The `&` binds to an expression named `baz`
-- The `@` binds to a property `bar`
-- The `&` binds to a property `foo`
 
 The parent scope might have many other properties,
 however, if this directive tries to access them,
@@ -174,10 +174,10 @@ This allows us to set up a boundary of sorts,
 which is great for making components,
 because its inputs and outputs, and thus its interface, are clearly defined.
 
-This is a rather simple explanation of the concepts of `restrict`, 
+This is a rather simple explanation of the concepts of `restrict`,
 `transclude`, and `scope` isolation,
 which are necessary to make components in AngularJs.
-The follwing resources cover these in greater depth:
+The following resources cover these in greater depth:
 
 - [Creating components with AngularJs](http://blog.ijasoneverett.com/2013/03/creating-components-with-angular-js/)
 - [Understanding Scopes - Directives](https://github.com/angular/angular.js/wiki/Understanding-Scopes#-directives)
@@ -186,7 +186,7 @@ As mentioned earlier, AngularJs does not provide a means to create web component
 What is does provide you with, however, are some lower level concepts,
 with which web components may be created.
 Combine them together using certain design patterns,
-such as these ones described above, 
+such as these ones described above,
 and you have got your own web components.
 
 That being said, all that flexibility means that you can put these concepts together in novel ways,
@@ -254,13 +254,13 @@ This is quite easily achieved:
 		{{#the-foo foo=model}}
 			<p>This paragraph will be displayed where {{yield}} is<p>
 		{{/the-foo}}
-		
+
 Extremely straightforward.
 
-One last thing, is that in AngularJs components, 
+One last thing, is that in AngularJs components,
 you already have a directive,
 and if you wish to add additional properties and actions,
-you simply stick them in the scope..
+you simply stick them in the scope.
 
 In EmberJs components, we can get transclusion and scope isolation,
 without writing any Javascript.
@@ -300,7 +300,7 @@ Reading this,it is evident that Ember has a concrete plan for
 Previously, we have discussed models, views, and controllers,
 in the context of the MVC pattern.
 Where do components fit into this?
-Components actually fit into this paradigm quite nicely - 
+Components actually fit into this paradigm quite nicely -
 a component, in essence, is grouping together a combination of
 models, views/ templates, and controllers,
 into smaller, resuable units.
@@ -325,14 +325,14 @@ when making this decision.
 These are less about the basic building blocks -
 higher order differentiating factors.
 While these are important too, remeber that basics come first.
-If you form a string preference based upon the basics alone,
+If you form a strong preference based upon the basics alone,
 then go with it.
 Chances are, the more abstract concepts are not going to sway you
 very much after all.
 
 On the other hand, if you still feel like it could go either way,
 it will be worth looking into them.
-These concepts include testability, search engine optimisation, 
+These concepts include testability, search engine optimisation,
 developer productivity, level of abstraction, level of opinionation,
 digest cycle/ run loop, community.
 Hit me up in the comments or on twitter if you would like me to continue this series,
