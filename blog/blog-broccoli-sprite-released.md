@@ -14,7 +14,7 @@ tags:
 - sprite
 ---
 
-[![NPM](https://nodei.co/npm/broccoli-sprite.png?compact=true)](https://nodei.co/npm/broccoli-sprite/)
+[![NPM](https://nodei.co/npm/broccoli-sprite.png?compact=true)](https://github.com/bguiz/broccoli-sprite)
 
 After much frustration attempting to get [`broccoli-compass`](https://github.com/g13013/broccoli-compass) to work,
 including asking a [question on Stackoverflow](http://stackoverflow.com/q/24074351/194982),
