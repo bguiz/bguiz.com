@@ -219,6 +219,6 @@ which means that you will likely find what you are looking for rather quickly.
 In fact, that is precisely what I did to get up to speed,
 when writing [brocoli-sprite](https://github.com/bguiz/broccoli-sprite).
 
-[![NPM](https://nodei.co/npm/broccoli-sprite.png?compact=true)](https://github.com/bguiz/broccoli-sprite)
+[![broccoli-sprite NPM](https://nodei.co/npm/broccoli-sprite.png?compact=true)](https://github.com/bguiz/broccoli-sprite)
 
 Good luck with yours!
